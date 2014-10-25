@@ -6,15 +6,13 @@
 
 package VO;
 
+import java.util.Date;
+
 /**
  *
  * @author lennon
  */
 public class JulgarArtigoVO {
-    
-    private static String avaliacao1;
-    private static String avaliacao2;
-    private static String avaliacao3;
     
     public static JulgarArtigoVO instancia;
     
@@ -25,46 +23,75 @@ public class JulgarArtigoVO {
             instancia = new JulgarArtigoVO();
         return instancia;
     }
+    
+    private int id = 0;
+    
+    private String titulo, avaliacao1, avaliacao2, avaliacao3, situacao;
+    
+    private Date data = new Date();
+    private java.sql.Date dataSQL = new java.sql.Date(data.getTime());
 
-    /**
-     * @return the avaliacao1
-     */
-    public static String getAvaliacao1() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAvaliacao1() {
         return avaliacao1;
     }
 
-    /**
-     * @param aAvaliacao1 the avaliacao1 to set
-     */
-    public static void setAvaliacao1(String aAvaliacao1) {
-        avaliacao1 = aAvaliacao1;
+    public void setAvaliacao1(String avaliacao1) {
+        this.avaliacao1 = avaliacao1;
     }
 
-    /**
-     * @return the avaliacao2
-     */
-    public static String getAvaliacao2() {
+    public String getAvaliacao2() {
         return avaliacao2;
     }
 
-    /**
-     * @param aAvaliacao2 the avaliacao2 to set
-     */
-    public static void setAvaliacao2(String aAvaliacao2) {
-        avaliacao2 = aAvaliacao2;
+    public void setAvaliacao2(String avaliacao2) {
+        this.avaliacao2 = avaliacao2;
     }
 
-    /**
-     * @return the avaliacao3
-     */
-    public static String getAvaliacao3() {
+    public String getAvaliacao3() {
         return avaliacao3;
     }
 
-    /**
-     * @param aAvaliacao3 the avaliacao3 to set
-     */
-    public static void setAvaliacao3(String aAvaliacao3) {
-        avaliacao3 = aAvaliacao3;
+    public void setAvaliacao3(String avaliacao3) {
+        this.avaliacao3 = avaliacao3;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public java.sql.Date getDataSQL() {
+        return dataSQL;
+    }
+
+    public void setDataSQL(java.sql.Date dataSQL) {
+        this.dataSQL = dataSQL;
     }
 }

@@ -6,15 +6,8 @@
 
 package TELAS;
 
-import PERS.Conexao;
-import VO.AvaliadorVO;
-import VO.ProxyLogin;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
+import RN.LoginRN;
+import VO.LoginVO;
 
 /**
  *
@@ -128,50 +121,12 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
         
-        ProxyLogin telaLogin = new ProxyLogin(txtUser.getText(), txtSenha.getText());
-//              TelaLoginPoxy ac = TelaLoginProxy.getInstancia();
-            
-        if (telaLogin.temPermissaoDeAcesso()){
-
-            Conexao cx = Conexao.getInstancia();
-
-            try {
-
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM LOGIN WHERE USUARIO = '"
-                + txtUser.getText() + "' AND SENHA = '" + txtSenha.getText() + "'");
-
-                while(resultado.next()){
-                    System.out.println("usuario: " + txtUser.getText() + " senha: " + txtSenha.getText());
-
-                    JOptionPane.showMessageDialog(null, "Bem vindo, " + resultado.getString("NOME") + "!");
-
-                    if (resultado.getString("FUNCAO").equals("Avaliador")){
-                        this.setVisible(false);
-                        
-                        AvaliadorVO avo = AvaliadorVO.getInstancia();
-                        avo.setIdAvaliador(Integer.parseInt(resultado.getString("IDLOGIN")));
-                        
-                        TelaAvaliador Avaliador = new TelaAvaliador();
-                        Avaliador.setVisible(true);
-                    } else 
-                    {
-                        TelaMenu Menu = TelaMenu.getInstancia();
-                        Menu.setFuncao((resultado.getString("FUNCAO")));
-                        
-                        this.setVisible(false);
-                        Menu.setVisible(true);
-                    }
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
-        }else 
-        {
-            JOptionPane.showMessageDialog(null, "Login e/ou senha inválido!");
-        }
+        LoginVO lvo = LoginVO.getInstancia();
+        lvo.setUser(txtUser.getText());
+        lvo.setSenha(txtSenha.getText());
+        
+        LoginRN lrn = LoginRN.getInstancia();
+        
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed

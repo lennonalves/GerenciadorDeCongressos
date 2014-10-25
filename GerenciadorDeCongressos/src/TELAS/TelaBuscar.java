@@ -10,6 +10,7 @@ import RN.BuscaRN;
 import VO.BuscaVO;
 import VO.CongressoVO;
 import VO.EditorasVO;
+import VO.JulgarArtigoVO;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -527,24 +528,34 @@ public class TelaBuscar extends javax.swing.JFrame {
         }
         
         if (bvo.getDefinirTela() == 9){ //Artigo Publicacao
-            TelaPublicacoes Publica = TelaPublicacoes.getInstancia(); //chama instancia
-            Publica.setId(bvo.getLinha()); //recebe id
-            Publica.preencheTela(1); //liga flag
-            Publica.setVisible(true); //chama tela buscada
+            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+            pvo.setId(bvo.getLinha());
+            
+            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
+            publica.preencheTela(1);
+            publica.setVisible(true);
+            
         }
         
         if (bvo.getDefinirTela() == 10){ //Editora Publicacao
-            TelaPublicacoes Publica = TelaPublicacoes.getInstancia(); //chama instancia
-            Publica.setId(bvo.getLinha()); //recebe id
-            Publica.preencheTela(2); //liga flag
-            Publica.setVisible(true); //chama tela buscada
+            
+            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+            pvo.setId(bvo.getLinha());
+            
+            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
+            publica.preencheTela(2);
+            publica.setVisible(true);
+            
         }
         
         if (bvo.getDefinirTela() == 11){ //Artigo Julgar
-            TelaJulgarArtigo Julgar = TelaJulgarArtigo.getInstancia(); //chama instancia
-            Julgar.setId(bvo.getLinha()); //recebe id
-            Julgar.preencheTela(1); //liga flag
-            Julgar.setVisible(true); //chama tela buscada
+            
+            JulgarArtigoVO javo = JulgarArtigoVO.getInstancia();
+            javo.setId(bvo.getLinha());
+            
+            TelaJulgarArtigo telaJulgarArtigo = TelaJulgarArtigo.getInstancia();
+            telaJulgarArtigo.preencheTela(1);
+            telaJulgarArtigo.setVisible(true);
         }
         
     }//GEN-LAST:event_btnEnviarActionPerformed

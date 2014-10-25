@@ -6,8 +6,8 @@
 
 package TELAS;
 
+import VO.MenuVO;
 import javax.swing.JOptionPane;
-import VO.ProxyMenu;
 
 /**
  *
@@ -19,7 +19,6 @@ public class TelaMenu extends javax.swing.JFrame {
      * Creates new form TelaMenu
      */
     
-    private String funcao;
     public static TelaMenu instancia;
     
     protected TelaMenu() {
@@ -313,7 +312,9 @@ public class TelaMenu extends javax.swing.JFrame {
 //        System.out.println("fora: " + getFuncao());
 //        tela.qualPermissao(getFuncao());
         
-        if (getFuncao().equals("Comite de Programa")){
+        MenuVO mvo = MenuVO.getInstancia();
+        
+        if (mvo.getFuncao().equals("Comite de Programa")){
             btnCongressos.setEnabled(true);
             btnEditoras.setEnabled(true);
             btnPessoas.setEnabled(true);
@@ -327,7 +328,7 @@ public class TelaMenu extends javax.swing.JFrame {
             btnUser.setEnabled(false);
             btnSair.setEnabled(true);
         }
-        else if (getFuncao().equals("Comite Organizador")){
+        else if (mvo.getFuncao().equals("Comite Organizador")){
             btnCongressos.setEnabled(false);
             btnEditoras.setEnabled(false);
             btnPessoas.setEnabled(true);
@@ -341,7 +342,7 @@ public class TelaMenu extends javax.swing.JFrame {
             btnUser.setEnabled(false);
             btnSair.setEnabled(true);
         }
-        else if (getFuncao().equals("admin")){
+        else if (mvo.getFuncao().equals("admin")){
             btnCongressos.setEnabled(true);
             btnEditoras.setEnabled(true);
             btnPessoas.setEnabled(true);
@@ -496,17 +497,4 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the funcao
-     */
-    public String getFuncao() {
-        return funcao;
-    }
-
-    /**
-     * @param funcao the funcao to set
-     */
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
-    }
 }

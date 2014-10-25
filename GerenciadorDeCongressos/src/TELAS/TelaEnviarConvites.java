@@ -6,15 +6,8 @@
 
 package TELAS;
   
-import PERS.Conexao;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-//import org.apache.commons.mail.*;
+import RN.ConvitesRN;
+import VO.ConvitesVO;
 
 /**
  *
@@ -117,43 +110,15 @@ public class TelaEnviarConvites extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-//        Conexao cx = Conexao.getInstancia();
-//        
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet destinatarios = consulta.executeQuery("SELECT * FROM PESSOA");
-//                ResultSet nomeCongresso = consulta.executeQuery("SELECT * FROM CONGRESSO");
-//                if (nomeCongresso.next()){
-//                    while (destinatarios.next()){
-//                        SimpleEmail email = new SimpleEmail();
-//                        email.setSSLOnConnect(true);
-//                        email.setHostName( "smtp.gmail.com" );
-//                        email.setSslSmtpPort( "465" );
-//                        email.setAuthenticator( new DefaultAuthenticator( "lennonalvesdias@gmail.com" ,  "LennonVinicius23" ) );
-//                        try {
-//                            email.setFrom( "lennonalvesdias@gmail.com");
-//
-//                            email.setDebug(true);
-//
-//                            email.setSubject( "Voce foi convidado para participar do " + nomeCongresso.getString("NOME") );
-//                            email.setMsg( txtMensagem.getText() );
-//                            email.addTo( destinatarios.getString("EMAIL") );
-//
-//                            email.send();
-//
-//                        } catch (EmailException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                    }
-//                }
-//                cx.desconectar();
-//                JOptionPane.showMessageDialog(null, "Email(s) enviado(s) com sucesso!");
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        
-//        this.setVisible(false);
+        
+        ConvitesVO cvo = ConvitesVO.getInstancia();
+        cvo.setMensagem(txtMensagem.getText());
+        
+        ConvitesRN crn = ConvitesRN.getInstancia();
+        String mensagem = crn.enviarConvite(cvo);
+        
+        this.setVisible(false);
+        
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**

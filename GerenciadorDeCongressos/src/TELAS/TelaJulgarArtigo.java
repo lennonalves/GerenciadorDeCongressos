@@ -7,6 +7,8 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.JulgarArtigoRN;
+import VO.BuscaVO;
 import VO.JulgarArtigoVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,7 +27,6 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
      * Creates new form TelaJulgarArtigo
      */
     
-    private int id = 0;
     public static TelaJulgarArtigo instancia;
     
     protected TelaJulgarArtigo() {
@@ -37,9 +38,6 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
             instancia = new TelaJulgarArtigo();
         return instancia;
     }
-    
-    Date data = new Date();
-    java.sql.Date dataSQL = new java.sql.Date(data.getTime());
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,10 +184,15 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
 
     private void btnTituloArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituloArtigoActionPerformed
         // TODO add your handling code here:
+        
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(11);
-        Buscar.setVisible(true);
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(11);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
+        
     }//GEN-LAST:event_btnTituloArtigoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -199,61 +202,33 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
 
     private void btnSubmeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmeterActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        JulgarArtigoVO javo = JulgarArtigoVO.getInstancia();
+        javo.setTitulo(txtTituloArtigo.getText());
+        javo.setAvaliacao1(txtAvaliacao1.getText());
+        javo.setAvaliacao2(txtAvaliacao2.getText());
+        javo.setAvaliacao3(txtAvaliacao3.getText());
+        javo.setSituacao((String) cbSituacao.getSelectedItem());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            
-            if (cbSituacao.getSelectedItem().equals("Aprovado")){
-                query.executeUpdate("UPDATE ARTIGO SET "
-                    + "STATUS = " + 4 + ", "
-                    + "DATAJULGAMENTOARTIGO = '" + dataSQL + "' "
-                    + "WHERE IDARTIGO = " + getId());
-            } else {
-                query.executeUpdate("UPDATE ARTIGO SET "
-                    + "DATAJULGAMENTOARTIGO = '" + dataSQL + "' "
-                    + "WHERE IDARTIGO = " + getId());
-            }
-            
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Artigo julgado com sucesso!");
-            //limparDados();
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        JulgarArtigoRN jarn = JulgarArtigoRN.getInstancia();
+        jarn.julgarArtigo(javo);
+        
     }//GEN-LAST:event_btnSubmeterActionPerformed
 
     void preencheTela(int aux){
+        
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet titulo = consulta.executeQuery("SELECT TITULO FROM ARTIGO WHERE IDARTIGO = " + getId());
-                ResultSet parecer = consulta.executeQuery("SELECT PARECER FROM ARTIGO AR "
-                        + "JOIN AVALIACAO AV "
-                        + "ON AR.IDARTIGO = AV.IDARTIGO "
-                        + "WHERE AR.IDARTIGO = " + getId());
-                if (titulo.next()){
-                    txtTituloArtigo.setText(titulo.getString("TITULO"));
-                    if (parecer.next())
-                        txtAvaliacao1.setText(parecer.getString("PARECER"));
-                    if (parecer.next())
-                        txtAvaliacao2.setText(parecer.getString("PARECER"));
-                    if (parecer.next())
-                        txtAvaliacao3.setText(parecer.getString("PARECER"));
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            JulgarArtigoVO javo = JulgarArtigoVO.getInstancia();
+
+            JulgarArtigoRN jarn = JulgarArtigoRN.getInstancia();
+            jarn.atualizaCampos(javo);
+            
+            txtTituloArtigo.setText(javo.getTitulo());
+            txtAvaliacao1.setText(javo.getAvaliacao1());
+            txtAvaliacao2.setText(javo.getAvaliacao2());
+            txtAvaliacao3.setText(javo.getAvaliacao3());
+            cbSituacao.setSelectedItem(javo.getSituacao());
             
         }
     }
@@ -314,17 +289,4 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
     private javax.swing.JTextField txtTituloArtigo;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 }
