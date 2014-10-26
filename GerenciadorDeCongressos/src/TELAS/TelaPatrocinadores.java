@@ -6,15 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.PatrocinadoresRN;
 import VO.BuscaVO;
 import VO.PatrocinadoresVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 /**
  *

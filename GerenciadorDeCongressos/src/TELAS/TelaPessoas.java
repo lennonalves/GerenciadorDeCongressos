@@ -7,6 +7,10 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.BuscaRN;
+import RN.PessoasRN;
+import VO.BuscaVO;
+import VO.PessoasVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +27,6 @@ public class TelaPessoas extends javax.swing.JFrame {
      * Creates new form TelaPessoas
      */
     
-    private int id = 0;
     public static TelaPessoas instancia;
     
     protected TelaPessoas() {
@@ -280,103 +283,79 @@ public class TelaPessoas extends javax.swing.JFrame {
     private void lblImgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImgBuscarMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(3);
-        Buscar.setVisible(true);
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(3);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblImgBuscarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(3);
-        Buscar.setVisible(true);
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(3);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        PessoasVO pvo = PessoasVO.getInstancia();
+        pvo.setNome(txtNomePessoa.getText());
+        pvo.setEndereco(txtEnderecoPessoa.getText());
+        pvo.setTelefone(txtTelefonePessoa.getText());
+        pvo.setEmail(txtEmailPessoa.getText());
+        pvo.setFuncao((String) cbFuncao.getSelectedItem());
+        pvo.setInstituicao(txtInstituicaoPessoa.getText());
+        pvo.setArea1((String) cbArea1.getSelectedItem());
+        pvo.setArea2((String) cbArea2.getSelectedItem());
+        pvo.setArea3((String) cbArea3.getSelectedItem());
+                
+        PessoasRN prn = PessoasRN.getInstancia();
+        prn.editaPessoas(pvo);
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("UPDATE PESSOA SET "
-                    + "NOME = '" + txtNomePessoa.getText() + "', "
-                    + "ENDERECO = '" + txtEnderecoPessoa.getText() + "', "
-                    + "TELEFONE = '" + txtTelefonePessoa.getText() + "', "
-                    + "EMAIL = '" + txtEmailPessoa.getText() + "', "
-                    + "FUNCAO = '" + cbFuncao.getSelectedItem() + "', "
-                    + "INSTITUICAO = '" + txtInstituicaoPessoa.getText() + "', "
-                    + "AREA1 = '" + cbArea1.getSelectedItem() + "', "
-                    + "AREA2 = '" + cbArea2.getSelectedItem() + "', "
-                    + "AREA3 = '" + cbArea3.getSelectedItem() + "' "
-                    + "WHERE IDPESSOA = " + getId());
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Pessoa editada com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        PessoasVO pvo = PessoasVO.getInstancia();
+        pvo.setNome(txtNomePessoa.getText());
+        pvo.setEndereco(txtEnderecoPessoa.getText());
+        pvo.setTelefone(txtTelefonePessoa.getText());
+        pvo.setEmail(txtEmailPessoa.getText());
+        pvo.setFuncao((String) cbFuncao.getSelectedItem());
+        pvo.setInstituicao(txtInstituicaoPessoa.getText());
+        pvo.setArea1((String) cbArea1.getSelectedItem());
+        pvo.setArea2((String) cbArea2.getSelectedItem());
+        pvo.setArea3((String) cbArea3.getSelectedItem());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("INSERT INTO PESSOA "
-                    + "(NOME, ENDERECO, TELEFONE, EMAIL, FUNCAO, INSTITUICAO,"
-                    + "AREA1, AREA2, AREA3) "
-                    + "VALUES "
-                    + "('" + txtNomePessoa.getText() + "', "
-                    + "'" + txtEnderecoPessoa.getText() + "', "
-                    + "'" + txtTelefonePessoa.getText() + "', "
-                    + "'" + txtEmailPessoa.getText() + "', "
-                    + "'" + cbFuncao.getSelectedItem() + "', "
-                    + "'" + txtInstituicaoPessoa.getText() + "', "
-                    + "'" + cbArea1.getSelectedItem() + "', "
-                    + "'" + cbArea2.getSelectedItem() + "', "
-                    + "'" + cbArea3.getSelectedItem() + "')");
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        PessoasRN prn = PessoasRN.getInstancia();
+        prn.cadastraPessoas(pvo);
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     void preencheTela(int aux){
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM PESSOA WHERE IDPESSOA = " + getId());
-                if (resultado.next()){
-                    txtNomePessoa.setText(resultado.getString("NOME"));
-                    txtEnderecoPessoa.setText(resultado.getString("ENDERECO"));
-                    txtTelefonePessoa.setText(resultado.getString("TELEFONE"));
-                    txtEmailPessoa.setText(resultado.getString("EMAIL"));
-                    cbFuncao.setSelectedItem(resultado.getString("FUNCAO"));
-                    txtInstituicaoPessoa.setText(resultado.getString("INSTITUICAO"));
-                    cbArea1.setSelectedItem(resultado.getString("AREA1"));
-                    cbArea2.setSelectedItem(resultado.getString("AREA2"));
-                    cbArea3.setSelectedItem(resultado.getString("AREA3"));
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            PessoasVO pvo = PessoasVO.getInstancia();
+            PessoasRN prn = PessoasRN.getInstancia();
+            prn.atualizaCampos(pvo);
+            
+            txtNomePessoa.setText(pvo.getNome());
+            txtEnderecoPessoa.setText(pvo.getEndereco());
+            txtTelefonePessoa.setText(pvo.getTelefone());
+            txtEmailPessoa.setText(pvo.getEmail());
+            cbFuncao.setSelectedItem(pvo.getFuncao());
+            txtInstituicaoPessoa.setText(pvo.getInstituicao());
+            cbArea1.setSelectedItem(pvo.getArea1());
+            cbArea2.setSelectedItem(pvo.getArea2());
+            cbArea3.setSelectedItem(pvo.getArea3());
             
         }
     }
@@ -444,17 +423,4 @@ public class TelaPessoas extends javax.swing.JFrame {
     private javax.swing.JLabel txtTipoPessoa;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 }
