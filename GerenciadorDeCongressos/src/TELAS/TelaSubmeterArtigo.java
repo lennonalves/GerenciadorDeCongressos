@@ -6,6 +6,8 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.SubmeterArtigoRN;
+import VO.BuscaVO;
 import VO.SubmeterArtigoVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,11 +25,7 @@ public class TelaSubmeterArtigo extends javax.swing.JFrame {
     /**
      * Creates new form TelaSubmeterArtigo
      */
-    private int id = 0;
-    private int nautor;
     
-    Date data = new Date();
-    java.sql.Date dataSQL = new java.sql.Date(data.getTime());
     
     public static TelaSubmeterArtigo instancia;
     
@@ -213,90 +211,73 @@ public class TelaSubmeterArtigo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAutor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutor1ActionPerformed
-        // TODO add your handling code here:
-        SubmeterArtigoVO.setTituloArtigo(txtTituloArtigo.getText());
-        SubmeterArtigoVO.setTemaArtigo(txtTemaArtigo.getText());
-        SubmeterArtigoVO.setNomeAutor1(txtNomeAutor1.getText());
-        SubmeterArtigoVO.setNomeAutor2(txtNomeAutor2.getText());
-        SubmeterArtigoVO.setNomeAutor3(txtNomeAutor3.getText());
+    void salvarDados() {
+        
+        SubmeterArtigoVO savo = SubmeterArtigoVO.getInstancia();
+        savo.setTituloArtigo(txtTituloArtigo.getText());
+        savo.setTemaArtigo(txtTemaArtigo.getText());
+        savo.setNomeAutor1(txtNomeAutor1.getText());
+        savo.setNomeAutor2(txtNomeAutor2.getText());
+        savo.setNomeAutor3(txtNomeAutor3.getText());
+        
+    }
+    
+    void btnAutores() {
+        
+        salvarDados();
         
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setNautor(1);
-        Buscar.setDefinirTela(6);
-        Buscar.setVisible(true);
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setNautor(1);
+        bvo.setDefinirTela(6);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
+        
+    }
+    
+    private void btnAutor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutor1ActionPerformed
+        // TODO add your handling code here:
+        
+        btnAutores();
+        
     }//GEN-LAST:event_btnAutor1ActionPerformed
 
     private void btnAutor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutor2ActionPerformed
         // TODO add your handling code here:
-        SubmeterArtigoVO.setTituloArtigo(txtTituloArtigo.getText());
-        SubmeterArtigoVO.setTemaArtigo(txtTemaArtigo.getText());
-        SubmeterArtigoVO.setNomeAutor1(txtNomeAutor1.getText());
-        SubmeterArtigoVO.setNomeAutor2(txtNomeAutor2.getText());
-        SubmeterArtigoVO.setNomeAutor3(txtNomeAutor3.getText());
         
-        this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setNautor(2);
-        Buscar.setDefinirTela(6);
-        Buscar.setVisible(true);
+        btnAutores();
+        
     }//GEN-LAST:event_btnAutor2ActionPerformed
 
     private void btnAutor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutor3ActionPerformed
         // TODO add your handling code here:
-        SubmeterArtigoVO.setTituloArtigo(txtTituloArtigo.getText());
-        SubmeterArtigoVO.setTemaArtigo(txtTemaArtigo.getText());
-        SubmeterArtigoVO.setNomeAutor1(txtNomeAutor1.getText());
-        SubmeterArtigoVO.setNomeAutor2(txtNomeAutor2.getText());
-        SubmeterArtigoVO.setNomeAutor3(txtNomeAutor3.getText());
         
-        this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setNautor(3);
-        Buscar.setDefinirTela(6);
-        Buscar.setVisible(true);
+        btnAutores();
+        
     }//GEN-LAST:event_btnAutor3ActionPerformed
 
     void preencheTela(int aux) {
         if (aux == 1) {
             
-            Conexao cx = Conexao.getInstancia();
-
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM PESSOA WHERE IDPESSOA = " + getId());
-                    
-                txtTituloArtigo.setText(SubmeterArtigoVO.getTituloArtigo());
-                txtTemaArtigo.setText(SubmeterArtigoVO.getTemaArtigo());
-                
-                if (this.getNautor() == 1) {
-                    if (resultado.next()) {
-                        txtNomeAutor1.setText(resultado.getString("NOME"));
-                        txtNomeAutor2.setText(SubmeterArtigoVO.getNomeAutor2());
-                        txtNomeAutor3.setText(SubmeterArtigoVO.getNomeAutor3());
-                    }
-                }
-                if (this.getNautor() == 2) {
-                    if (resultado.next()) {
-                        txtNomeAutor1.setText(SubmeterArtigoVO.getNomeAutor1());
-                        txtNomeAutor2.setText(resultado.getString("NOME"));
-                        txtNomeAutor3.setText(SubmeterArtigoVO.getNomeAutor3());
-                    }
-                }
-                if (this.getNautor() == 3) {
-                    if (resultado.next()) {
-                        txtNomeAutor1.setText(SubmeterArtigoVO.getNomeAutor1());
-                        txtNomeAutor2.setText(SubmeterArtigoVO.getNomeAutor2());
-                        txtNomeAutor3.setText(resultado.getString("NOME"));
-                    }
-                }
-
-                cx.desconectar();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "ERRO: " + e.getMessage());
-            }
+            SubmeterArtigoVO savo = SubmeterArtigoVO.getInstancia();
+            savo.setTituloArtigo(txtTituloArtigo.getText());
+            savo.setTemaArtigo(txtTemaArtigo.getText());
+            savo.setAreaArtigo((String) cbAreaArtigo.getSelectedItem());
+            savo.setNomeAutor1(txtNomeAutor1.getText());
+            savo.setNomeAutor2(txtNomeAutor2.getText());
+            savo.setNomeAutor3(txtNomeAutor3.getText());
+            
+            SubmeterArtigoRN sarn = SubmeterArtigoRN.getInstancia();
+            sarn.atualizaCampos(savo);
+            
+            txtTituloArtigo.setText(savo.getTituloArtigo());
+            txtTemaArtigo.setText(savo.getTemaArtigo());
+            cbAreaArtigo.setSelectedItem(savo.getAreaArtigo());
+            txtNomeAutor1.setText(savo.getNomeAutor1());
+            txtNomeAutor2.setText(savo.getNomeAutor2());
+            txtNomeAutor3.setText(savo.getNomeAutor3());
 
         }
     }

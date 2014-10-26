@@ -6,16 +6,13 @@
 
 package VO;
 
+import java.util.Date;
+
 /**
  *
  * @author lennon
  */
 public class SubmeterArtigoVO {
-    private static String tituloArtigo;
-    private static String temaArtigo;
-    private static String nomeAutor1;
-    private static String nomeAutor2;
-    private static String nomeAutor3;
     
     public static SubmeterArtigoVO instancia;
     
@@ -26,75 +23,91 @@ public class SubmeterArtigoVO {
             instancia = new SubmeterArtigoVO();
         return instancia;
     }
+    
+    private int id, nautor;
+    private String tituloArtigo, temaArtigo, areaArtigo, nomeAutor1, nomeAutor2, nomeAutor3;
+    
+    private Date data = new Date();
+    private java.sql.Date dataSQL = new java.sql.Date(data.getTime());
 
-    /**
-     * @return the tituloArtigo
-     */
-    public static String getTituloArtigo() {
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public java.sql.Date getDataSQL() {
+        return dataSQL;
+    }
+
+    public void setDataSQL(java.sql.Date dataSQL) {
+        this.dataSQL = dataSQL;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getNautor() {
+        return nautor;
+    }
+
+    public void setNautor(int nautor) {
+        this.nautor = nautor;
+    }
+
+    public String getTituloArtigo() {
         return tituloArtigo;
     }
 
-    /**
-     * @param aTituloArtigo the tituloArtigo to set
-     */
-    public static void setTituloArtigo(String aTituloArtigo) {
-        tituloArtigo = aTituloArtigo;
+    public void setTituloArtigo(String tituloArtigo) {
+        this.tituloArtigo = tituloArtigo;
     }
 
-    /**
-     * @return the temaArtigo
-     */
-    public static String getTemaArtigo() {
+    public String getTemaArtigo() {
         return temaArtigo;
     }
 
-    /**
-     * @param aTemaArtigo the temaArtigo to set
-     */
-    public static void setTemaArtigo(String aTemaArtigo) {
-        temaArtigo = aTemaArtigo;
+    public void setTemaArtigo(String temaArtigo) {
+        this.temaArtigo = temaArtigo;
     }
 
-    /**
-     * @return the nomeAutor1
-     */
-    public static String getNomeAutor1() {
+    public String getNomeAutor1() {
         return nomeAutor1;
     }
 
-    /**
-     * @param aNomeAutor1 the nomeAutor1 to set
-     */
-    public static void setNomeAutor1(String aNomeAutor1) {
-        nomeAutor1 = aNomeAutor1;
+    public void setNomeAutor1(String nomeAutor1) {
+        this.nomeAutor1 = nomeAutor1;
     }
 
-    /**
-     * @return the nomeAutor2
-     */
-    public static String getNomeAutor2() {
+    public String getNomeAutor2() {
         return nomeAutor2;
     }
 
-    /**
-     * @param aNomeAutor2 the nomeAutor2 to set
-     */
-    public static void setNomeAutor2(String aNomeAutor2) {
-        nomeAutor2 = aNomeAutor2;
+    public void setNomeAutor2(String nomeAutor2) {
+        this.nomeAutor2 = nomeAutor2;
     }
 
-    /**
-     * @return the nomeAutor3
-     */
-    public static String getNomeAutor3() {
+    public String getNomeAutor3() {
         return nomeAutor3;
     }
 
-    /**
-     * @param aNomeAutor3 the nomeAutor3 to set
-     */
-    public static void setNomeAutor3(String aNomeAutor3) {
-        nomeAutor3 = aNomeAutor3;
+    public void setNomeAutor3(String nomeAutor3) {
+        this.nomeAutor3 = nomeAutor3;
+    }
+
+    public String getAreaArtigo() {
+        return areaArtigo;
+    }
+
+    public void setAreaArtigo(String areaArtigo) {
+        this.areaArtigo = areaArtigo;
     }
 
 }
