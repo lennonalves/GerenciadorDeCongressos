@@ -317,7 +317,7 @@ public class TelaPessoas extends javax.swing.JFrame {
         pvo.setArea3((String) cbArea3.getSelectedItem());
                 
         PessoasRN prn = PessoasRN.getInstancia();
-        prn.editaPessoas(pvo);
+        JOptionPane.showMessageDialog(null, prn.editaPessoas(pvo));
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -336,7 +336,7 @@ public class TelaPessoas extends javax.swing.JFrame {
         pvo.setArea3((String) cbArea3.getSelectedItem());
         
         PessoasRN prn = PessoasRN.getInstancia();
-        prn.cadastraPessoas(pvo);
+        JOptionPane.showMessageDialog(null, prn.cadastraPessoas(pvo));
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

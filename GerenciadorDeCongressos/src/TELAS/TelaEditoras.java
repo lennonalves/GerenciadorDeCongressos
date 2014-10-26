@@ -242,7 +242,7 @@ public class TelaEditoras extends javax.swing.JFrame {
         evo.setEmail(txtEmailEditora.getText());
         
         EditorasRN ern = EditorasRN.getInstancia();
-        ern.editarEditoras(evo);
+        JOptionPane.showMessageDialog(null, ern.editarEditoras(evo));
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -267,7 +267,7 @@ public class TelaEditoras extends javax.swing.JFrame {
         evo.setEmail(txtEmailEditora.getText());
         
         EditorasRN ern = EditorasRN.getInstancia();
-        ern.cadastrarEditoras(evo);
+        JOptionPane.showMessageDialog(null, ern.cadastrarEditoras(evo));
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

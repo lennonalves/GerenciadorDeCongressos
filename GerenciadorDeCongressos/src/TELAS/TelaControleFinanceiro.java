@@ -8,6 +8,7 @@ package TELAS;
 
 import RN.FinanceiroRN;
 import VO.FinanceiroVO;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -297,7 +298,7 @@ public class TelaControleFinanceiro extends javax.swing.JFrame {
         fvo.setCustoItem(Double.valueOf(txtCustoItem.getText()));
         
         FinanceiroRN frn = FinanceiroRN.getInstancia();
-        String mensagem = frn.cadastrarFinanca(fvo);
+        JOptionPane.showMessageDialog(null, frn.cadastrarFinanca(fvo));
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

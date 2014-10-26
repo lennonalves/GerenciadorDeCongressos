@@ -374,39 +374,8 @@ public class TelaCongresso extends javax.swing.JFrame {
         cvo.setFimcongresso(txtFimCongresso.getText());
         
         CongressoRN crn = CongressoRN.getInstancia();
-        String mensagem = crn.cadastraCongresso(cvo);
+        JOptionPane.showMessageDialog(null, crn.cadastraCongresso(cvo));
         
-//        Conexao cx = Conexao.getInstancia();
-        
-        //JOptionPane.showMessageDialog(null, this.getId());
-        
-//        try {
-//            Connection con = cx.conectar();
-//            Statement query = con.createStatement();
-//            query.executeUpdate("INSERT INTO CONGRESSO "
-//                    + "(NOME, CNPJ, TEMA, EDICAO, AREA, NUMPARTICIPANTES, ENDERECO, DATAPRAZOINSCRICAO, "
-//                    + "DATAPRAZOSUBARTIGO, DATAPRAZOAVALIACAO, VALORINSCRICAO, DATAREALIZACAO, DATATERMINO) "
-//                    + "VALUES "
-//                    + "('" + txtNomeCongresso.getText() + "', "
-//                    + "'" + txtCNPJCongresso.getText() + "', "
-//                    + "'" + txtTemaCongresso.getText() + "', "
-//                    + "'" + txtEdicaoCongresso.getText() + "', "
-//                    + "'" + cbAreaCongresso.getSelectedItem() + "', "
-//                    + txtNumParticipantes.getText() + ", "
-//                    + "'" + txtEnderecoCongresso.getText() + "', "
-//                    + "'" + txtPrazoInscricao.getText() + "', "
-//                    + "'" + txtPrazoSubmissao.getText() + "', "
-//                    + "'" + txtPrazoAvaliacao.getText() + "', "
-//                    + "'" + txtValorInscricao.getText() + "', "
-//                    + "'" + txtInicioCongresso.getText() + "', "
-//                    + "'" + txtFimCongresso.getText()+ "')");
-//            cx.desconectar();
-//            
-//            JOptionPane.showMessageDialog(null, "Congresso cadastrado com sucesso!");
-//            
-//        } catch (SQLException e){
-//                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void lblImgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImgBuscarMouseClicked
@@ -449,37 +418,8 @@ public class TelaCongresso extends javax.swing.JFrame {
         cvo.setFimcongresso(txtFimCongresso.getText());
         
         CongressoRN crn = CongressoRN.getInstancia();
-        String mensagem = crn.editaCongresso(cvo);
+        JOptionPane.showMessageDialog(null, crn.editaCongresso(cvo));
         
-//        Conexao cx = Conexao.getInstancia();
-//        
-//        //JOptionPane.showMessageDialog(null, this.getId());
-//        
-//        try {
-//            Connection con = cx.conectar();
-//            Statement query = con.createStatement();
-//            query.executeUpdate("UPDATE CONGRESSO SET "
-//                    + "NOME = '" + txtNomeCongresso.getText() + "', "
-//                    + "CNPJ = '" + txtCNPJCongresso.getText() + "', "
-//                    + "TEMA = '" + txtTemaCongresso.getText() + "', "
-//                    + "EDICAO = '" + txtEdicaoCongresso.getText() + "', "
-//                    + "AREA = '" + cbAreaCongresso.getSelectedItem() + "', "
-//                    + "NUMPARTICIPANTES = '" + txtNumParticipantes.getText() + "', "
-//                    + "ENDERECO = '" + txtEnderecoCongresso.getText() + "', "
-//                    + "DATAPRAZOINSCRICAO = '" + txtPrazoInscricao.getText() + "', "
-//                    + "DATAPRAZOSUBARTIGO = '" + txtPrazoSubmissao.getText() + "', "
-//                    + "DATAPRAZOAVALIACAO = '" + txtPrazoAvaliacao.getText() + "', "
-//                    + "VALORINSCRICAO = '" + txtValorInscricao.getText() + "', "
-//                    + "DATAREALIZACAO = '" + txtInicioCongresso.getText() + "', "
-//                    + "DATATERMINO = '" + txtFimCongresso.getText()+ "' "
-//                    + "WHERE IDCONGRESSO = " + getId());
-//            cx.desconectar();
-//            
-//            JOptionPane.showMessageDialog(null, "Congresso editado com sucesso!");
-//            
-//        } catch (SQLException e){
-//                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     void atualizaCampos(int aux){

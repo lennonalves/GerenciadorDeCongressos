@@ -12,6 +12,11 @@ import VO.CongressoVO;
 import VO.EditorasVO;
 import VO.JulgarArtigoVO;
 import VO.PatrocinadoresVO;
+import VO.PessoasVO;
+import VO.PublicacoesVO;
+import VO.SessoesVO;
+import VO.SubmeterArtigoVO;
+import VO.UsuariosVO;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -179,214 +184,62 @@ public class TelaBuscar extends javax.swing.JFrame {
         BuscaVO bvo = BuscaVO.getInstancia();
         
         if (bvo.getDefinirTela() == 1){ //Congresso
-            TelaCongresso Congresso = TelaCongresso.getInstancia(); //chama instancia
-            Congresso.setVisible(true); //chama tela buscada
+            TelaCongresso telaCongresso = TelaCongresso.getInstancia(); //chama instancia
+            telaCongresso.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 2){ //Editora
-            TelaEditoras Editora = TelaEditoras.getInstancia(); //chama instancia
-            Editora.setVisible(true); //chama tela buscada
+            TelaEditoras telaEditora = TelaEditoras.getInstancia(); //chama instancia
+            telaEditora.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 3){ //Pessoa
-            TelaPessoas Pessoa = TelaPessoas.getInstancia(); //chama instancia
-            Pessoa.setVisible(true); //chama tela buscada
+            TelaPessoas telaPessoa = TelaPessoas.getInstancia(); //chama instancia
+            telaPessoa.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 4){ //Patrocinador
-            TelaPatrocinadores Patrocinador = TelaPatrocinadores.getInstancia(); //chama instancia
-            Patrocinador.setVisible(true); //chama tela buscada
+            TelaPatrocinadores telaPatrocinador = TelaPatrocinadores.getInstancia(); //chama instancia
+            telaPatrocinador.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 5){ //Usuários
-            TelaUsuarios Usuario = TelaUsuarios.getInstancia(); //chama instancia
-            Usuario.setVisible(true); //chama tela buscada
+            TelaUsuarios telaUsuario = TelaUsuarios.getInstancia(); //chama instancia
+            telaUsuario.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 6){ //Autores
-            TelaSubmeterArtigo Autor = TelaSubmeterArtigo.getInstancia(); //chama instancia
-            Autor.setVisible(true); //chama tela buscada
+            TelaSubmeterArtigo telaSubmeterArtigo = TelaSubmeterArtigo.getInstancia(); //chama instancia
+            telaSubmeterArtigo.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 7){ //Sessao
-            TelaSessoes Sessao = TelaSessoes.getInstancia(); //chama instancia
-            Sessao.setVisible(true); //chama tela buscada
+            TelaSessoes telaSessoes = TelaSessoes.getInstancia(); //chama instancia
+            telaSessoes.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 8){ //Moderador Sessao
-            TelaSessoes Sessao = TelaSessoes.getInstancia(); //chama instancia
-            Sessao.setVisible(true); //chama tela buscada
+            TelaSessoes telaSessoes = TelaSessoes.getInstancia(); //chama instancia
+            telaSessoes.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 9 || bvo.getDefinirTela() == 10){ //Publicacao
-            TelaPublicacoes Publica = TelaPublicacoes.getInstancia(); //chama instancia
-            Publica.setVisible(true); //chama tela buscada
+            TelaPublicacoes telaPublicacoes = TelaPublicacoes.getInstancia(); //chama instancia
+            telaPublicacoes.setVisible(true); //chama tela buscada
         }
         
         if (bvo.getDefinirTela() == 11){ //Julgar Artigos
-            TelaJulgarArtigo Julgar = TelaJulgarArtigo.getInstancia(); //chama instancia
-            Julgar.setVisible(true); //chama tela buscada
+            TelaJulgarArtigo telaJulgarArtigo = TelaJulgarArtigo.getInstancia(); //chama instancia
+            telaJulgarArtigo.setVisible(true); //chama tela buscada
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void fazerBusca (){
-//        dtm.setNumRows(0);
-//        Conexao cx = Conexao.getInstancia();
         
-//        if (this.getDefinirTela() == 1){
-//            //CONGRESSOS
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM CONGRESSO ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDCONGRESSO"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 2){
-//            //EDITORAS
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM EDITORA ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDEDITORA"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 3){
-//            //PESSOAS
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM PESSOA ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDPESSOA"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 4){
-//            //PATROCINADORES
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM PATROCINADOR ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDPATROCINADOR"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 5){
-//            //LOGIN
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM LOGIN WHERE FUNCAO <> 'admin' ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDLOGIN"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 6){
-//            //AUTORES
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM PESSOA WHERE FUNCAO = 'Autor' ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDPESSOA"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 7){
-//            //SESSAO
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM SESSAO ORDER BY AREA");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDSESSAO"), resultado.getString("AREA")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 8){
-//            //MODERADOR
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM PESSOA WHERE FUNCAO = 'Moderador' ORDER BY NOME");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDPESSOA"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 9){
-//            //ARTIGOS
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM ARTIGO WHERE STATUS = 4 ORDER BY TITULO");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDARTIGO"), resultado.getString("TITULO")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 10){
-//            //EDITORAS
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM EDITORA");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDEDITORA"), resultado.getString("NOME")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
-//        if (this.getDefinirTela() == 11){
-//            //ARTIGOS //JULGAR
-//            try {
-//                Connection con = cx.conectar();
-//                Statement consulta = con.createStatement();
-//                ResultSet resultado = consulta.executeQuery("SELECT * FROM ARTIGO WHERE STATUS = 3 AND DATAJULGAMENTOARTIGO IS NULL");
-//                while (resultado.next()){
-//                    dtm.addRow(new Object[] {resultado.getString("IDARTIGO"), resultado.getString("TITULO")});
-//                }
-//                cx.desconectar();
-//            } catch (SQLException e){
-//                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-//            }
-//        }
+        BuscaVO bvo = BuscaVO.getInstancia();
+        BuscaRN brn = BuscaRN.getInstancia();
+        brn.fazerBusca(bvo);
+        
     }
     
     private void lblImgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImgBuscarMouseClicked
@@ -445,8 +298,7 @@ public class TelaBuscar extends javax.swing.JFrame {
         
         BuscaVO bvo = BuscaVO.getInstancia();    
         bvo.setLinha(Integer.parseInt((String) tbPesquisa.getValueAt(tbPesquisa.getSelectedRow(), 0)));
-        //JOptionPane.showMessageDialog(null, "LINHA: " + linha);
-        
+                
     }//GEN-LAST:event_tbPesquisaMouseClicked
     
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
@@ -478,10 +330,14 @@ public class TelaBuscar extends javax.swing.JFrame {
         }
         
         if (bvo.getDefinirTela() == 3){ //Pessoa
-            TelaPessoas Pessoa = TelaPessoas.getInstancia(); //chama instancia
-            Pessoa.setId(bvo.getLinha()); //recebe id
-            Pessoa.preencheTela(1); //liga flag
-            Pessoa.setVisible(true); //chama tela buscada
+            
+            PessoasVO pvo = PessoasVO.getInstancia();
+            pvo.setId(bvo.getLinha());
+            
+            TelaPessoas telaPessoas = TelaPessoas.getInstancia();
+            telaPessoas.preencheTela(1);
+            telaPessoas.setVisible(true);
+        
         }
         
         if (bvo.getDefinirTela() == 4){ //Patrocinador
@@ -496,62 +352,77 @@ public class TelaBuscar extends javax.swing.JFrame {
         }
         
         if (bvo.getDefinirTela() == 5){ //Usuários
-            TelaUsuarios Usuario = TelaUsuarios.getInstancia(); //chama instancia
-            Usuario.setId(bvo.getLinha()); //recebe id
-            Usuario.preencheTela(1); //liga flag
-            Usuario.setVisible(true); //chama tela buscada
+            
+            UsuariosVO uvo = UsuariosVO.getInstancia();
+            uvo.setId(bvo.getLinha());
+            
+            TelaUsuarios telaUsuarios = TelaUsuarios.getInstancia();
+            telaUsuarios.preencheTela(1);
+            telaUsuarios.setVisible(true);
+            
         }
         
         if (bvo.getDefinirTela() == 6){ //Autores
-            TelaSubmeterArtigo Autor = TelaSubmeterArtigo.getInstancia(); //chama instancia
-            Autor.setId(bvo.getLinha()); //recebe id
-            if(bvo.getNautor() == 1){
-                Autor.setNautor(1);
-            }
-            if(bvo.getNautor() == 2){
-                Autor.setNautor(2);
-            }
-            if(bvo.getNautor() == 3){
-                Autor.setNautor(3);
-            }
-            Autor.preencheTela(1); //liga flag
-            Autor.setVisible(true);//chama tela buscada
+            
+            SubmeterArtigoVO savo = SubmeterArtigoVO.getInstancia();
+            savo.setId(bvo.getLinha());
+            
+            if(bvo.getNautor() == 1)
+                savo.setNautor(1);
+            if(bvo.getNautor() == 2)
+                savo.setNautor(2);
+            if(bvo.getNautor() == 3)
+                savo.setNautor(3);
+            
+            TelaSubmeterArtigo telaSubmissao = TelaSubmeterArtigo.getInstancia();
+            telaSubmissao.preencheTela(1);
+            telaSubmissao.setVisible(true);
+            
         }
         
         if (bvo.getDefinirTela() == 7){ //Sessao
-            TelaSessoes Sessao = TelaSessoes.getInstancia(); //chama instancia
-            Sessao.setId(bvo.getLinha()); //recebe id
-            Sessao.preencheTela(1); //liga flag
-            Sessao.setVisible(true); //chama tela buscada
+            
+            SessoesVO svo = SessoesVO.getInstancia();
+            svo.setId(bvo.getLinha());
+            
+            TelaSessoes telaSessao = TelaSessoes.getInstancia();
+            telaSessao.preencheTela(1);
+            telaSessao.setVisible(true);
+            
         }
         
         if (bvo.getDefinirTela() == 8){ //Moderador
-            TelaSessoes Sessao = TelaSessoes.getInstancia(); //chama instancia
-            Sessao.setId(bvo.getLinha()); //recebe id
-            Sessao.preencheModerador(1); //liga flag
-            Sessao.setVisible(true); //chama tela buscada
+            
+            SessoesVO svo = SessoesVO.getInstancia();
+            svo.setId(bvo.getLinha());
+            
+            TelaSessoes telaSessao = TelaSessoes.getInstancia();
+            telaSessao.preencheModerador(1);
+            telaSessao.setVisible(true);
+            
         }
         
-//        if (bvo.getDefinirTela() == 9){ //Artigo Publicacao
-//            PublicacoesVO pvo = PublicacoesVO.getInstancia();
-//            pvo.setId(bvo.getLinha());
-//            
-//            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
-//            publica.preencheTela(1);
-//            publica.setVisible(true);
-//            
-//        }
-//        
-//        if (bvo.getDefinirTela() == 10){ //Editora Publicacao
-//            
-//            PublicacoesVO pvo = PublicacoesVO.getInstancia();
-//            pvo.setId(bvo.getLinha());
-//            
-//            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
-//            publica.preencheTela(2);
-//            publica.setVisible(true);
-//            
-//        }
+        if (bvo.getDefinirTela() == 9){ //Artigo Publicacao
+            
+            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+            pvo.setId(bvo.getLinha());
+            
+            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
+            publica.preencheTela(1);
+            publica.setVisible(true);
+            
+        }
+        
+        if (bvo.getDefinirTela() == 10){ //Editora Publicacao
+            
+            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+            pvo.setId(bvo.getLinha());
+            
+            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
+            publica.preencheTela(2);
+            publica.setVisible(true);
+            
+        }
         
         if (bvo.getDefinirTela() == 11){ //Artigo Julgar
             

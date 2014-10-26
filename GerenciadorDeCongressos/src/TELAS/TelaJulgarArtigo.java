@@ -211,7 +211,7 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
         javo.setSituacao((String) cbSituacao.getSelectedItem());
         
         JulgarArtigoRN jarn = JulgarArtigoRN.getInstancia();
-        jarn.julgarArtigo(javo);
+        JOptionPane.showMessageDialog(null, jarn.julgarArtigo(javo));
         
     }//GEN-LAST:event_btnSubmeterActionPerformed
 

@@ -9,6 +9,7 @@ package TELAS;
 import RN.PatrocinadoresRN;
 import VO.BuscaVO;
 import VO.PatrocinadoresVO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -269,7 +270,7 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
         pvo.setValor(Integer.parseInt(txtValorPatrocinio.getText()));
         
         PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
-        prn.editarPatrocinador(pvo);
+        JOptionPane.showMessageDialog(null, prn.editarPatrocinador(pvo));
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -285,7 +286,7 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
         pvo.setValor(Integer.parseInt(txtValorPatrocinio.getText()));
         
         PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
-        prn.editarPatrocinador(pvo);
+        JOptionPane.showMessageDialog(null, prn.cadastrarPatrocinador(pvo));
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

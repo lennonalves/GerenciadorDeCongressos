@@ -8,6 +8,7 @@ package TELAS;
   
 import RN.ConvitesRN;
 import VO.ConvitesVO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -115,7 +116,7 @@ public class TelaEnviarConvites extends javax.swing.JFrame {
         cvo.setMensagem(txtMensagem.getText());
         
         ConvitesRN crn = ConvitesRN.getInstancia();
-        String mensagem = crn.enviarConvite(cvo);
+        JOptionPane.showMessageDialog(null, crn.enviarConvite(cvo));
         
         this.setVisible(false);
         

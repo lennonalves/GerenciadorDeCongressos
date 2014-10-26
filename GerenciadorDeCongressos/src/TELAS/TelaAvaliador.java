@@ -8,6 +8,7 @@ package TELAS;
 
 import RN.AvaliadorRN;
 import VO.AvaliadorVO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -170,7 +171,7 @@ public class TelaAvaliador extends javax.swing.JFrame {
         avo.setAvaliacaoArtigo(txtAvaliacao.getText());
         
         AvaliadorRN arn = AvaliadorRN.getInstancia();
-        String mensagem = arn.avaliaArtigo(avo);
+        JOptionPane.showMessageDialog(null, arn.avaliaArtigo(avo));
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 

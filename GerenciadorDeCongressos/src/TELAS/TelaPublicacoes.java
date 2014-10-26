@@ -218,7 +218,7 @@ public class TelaPublicacoes extends javax.swing.JFrame {
         pvo.setEditora(txtEditora.getText());
         
         PublicacoesRN prn = PublicacoesRN.getInstancia();
-        prn.publicar(pvo);
+        JOptionPane.showMessageDialog(null, prn.publicar(pvo));
         
     }//GEN-LAST:event_btnPublicarActionPerformed
 

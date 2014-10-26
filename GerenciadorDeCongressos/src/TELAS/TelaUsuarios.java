@@ -7,6 +7,9 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.UsuariosRN;
+import VO.BuscaVO;
+import VO.UsuariosVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +26,6 @@ public class TelaUsuarios extends javax.swing.JFrame {
      * Creates new form TelaUsuarios
      */
     
-    private int id = 0;
     public static TelaUsuarios instancia;
     
     protected TelaUsuarios() {
@@ -189,18 +191,24 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
     private void lblImgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImgBuscarMouseClicked
         // TODO add your handling code here:
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(5);
+        
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(5);
-        Buscar.setVisible(true);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblImgBuscarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
         // TODO add your handling code here:
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(5);
+        
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(5);
-        Buscar.setVisible(true);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void txtSenhaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaUserActionPerformed
@@ -218,27 +226,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        UsuariosVO uvo = UsuariosVO.getInstancia();
+        uvo.setNome(txtNomeUser.getText());
+        uvo.setUsuario(txtUser.getText());
+        uvo.setSenha(txtSenhaUser.getText());
+        uvo.setFuncao((String) cbFuncaoUser.getSelectedItem());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("UPDATE LOGIN SET "
-                    + "NOME = '" + txtNomeUser.getText() + "', "
-                    + "USUARIO = '" + txtUser.getText() + "', "
-                    + "SENHA = '" + txtSenhaUser.getText() + "', "
-                    + "FUNCAO = '" + cbFuncaoUser.getSelectedItem()+ "' "
-                    + "WHERE IDLOGIN = " + getId());
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Usuário editado com sucesso!");
-            //limparDados();
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        UsuariosRN urn = UsuariosRN.getInstancia();
+        JOptionPane.showMessageDialog(null, urn.editaUsuario(uvo));
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -247,33 +243,20 @@ public class TelaUsuarios extends javax.swing.JFrame {
         txtNomeUser.setText("");
         txtUser.setText("");
         txtSenhaUser.setText("");
-        //funcao
     }
     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        UsuariosVO uvo = UsuariosVO.getInstancia();
+        uvo.setNome(txtNomeUser.getText());
+        uvo.setUsuario(txtUser.getText());
+        uvo.setSenha(txtSenhaUser.getText());
+        uvo.setFuncao((String) cbFuncaoUser.getSelectedItem());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("INSERT INTO LOGIN "
-                    + "(NOME, USUARIO, SENHA, FUNCAO) "
-                    + "VALUES "
-                    + "('" + txtNomeUser.getText() + "', "
-                    + "'" + txtUser.getText() + "', "
-                    + "'" + txtSenhaUser.getText() + "', "
-                    + "'" + cbFuncaoUser.getSelectedItem()+ "')");
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-            //limparDados();
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        UsuariosRN urn = UsuariosRN.getInstancia();
+        JOptionPane.showMessageDialog(null, urn.cadastraUsuario(uvo));
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
@@ -283,22 +266,14 @@ public class TelaUsuarios extends javax.swing.JFrame {
     void preencheTela(int aux){
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM LOGIN WHERE IDLOGIN = " + getId());
-                if (resultado.next()){
-                    txtNomeUser.setText(resultado.getString("NOME"));
-                    txtUser.setText(resultado.getString("USUARIO"));
-                    txtSenhaUser.setText(resultado.getString("SENHA"));
-                    cbFuncaoUser.setSelectedItem(resultado.getString("FUNCAO"));
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            UsuariosVO uvo = UsuariosVO.getInstancia();
+            UsuariosRN urn = UsuariosRN.getInstancia();
+            urn.atualizaCampos(uvo);
+            
+            txtNomeUser.setText(uvo.getNome());
+            txtUser.setText(uvo.getUsuario());
+            txtSenhaUser.setText(uvo.getSenha());
+            cbFuncaoUser.setSelectedItem(uvo.getFuncao());
             
         }
     }
@@ -356,19 +331,5 @@ public class TelaUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtSenhaUser;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
 }

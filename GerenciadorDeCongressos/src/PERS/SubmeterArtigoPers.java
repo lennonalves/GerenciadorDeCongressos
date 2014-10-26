@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,6 +33,7 @@ public class SubmeterArtigoPers {
         String mensagem = null;
         
         try {
+            
             Connection con = cx.conectar();
             Statement consulta = con.createStatement();
             ResultSet resultado = consulta.executeQuery("SELECT * FROM PESSOA WHERE IDPESSOA = " + savo.getId());
@@ -55,6 +55,87 @@ public class SubmeterArtigoPers {
             }
 
             cx.desconectar();
+            
+        } catch (SQLException e) {
+            
+            mensagem = "ERRO: " + e.getMessage();
+            
+        }
+        
+        return mensagem;
+        
+    }
+    
+    public String submeteArtigo (SubmeterArtigoVO savo) {
+        
+        Conexao cx = Conexao.getInstancia();
+        String mensagem = null;
+        
+        try {
+            
+            Connection con = cx.conectar();
+            Statement query = con.createStatement();
+            Statement consulta = con.createStatement();
+            ResultSet autor1 = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
+                    + "WHERE NOME = '" + savo.getNomeAutor1() + "'");
+            ResultSet autor2 = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
+                    + "WHERE NOME = '" + savo.getNomeAutor2() + "'");
+            ResultSet autor3 = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
+                    + "WHERE NOME = '" + savo.getNomeAutor3() + "'");
+            
+            if (autor1.next()){
+                //int status = 0;
+                if (!"".equals(savo.getNomeAutor2())){
+                    if (!"".equals(savo.getNomeAutor2())){
+                        //autor 1, 2 e 3
+                        if (autor2.next()){
+                            if (autor3.next()){
+                                query.executeUpdate("INSERT INTO ARTIGO "
+                                + "(TITULO, TEMA, AREA, AUTOR1, AUTOR2, AUTOR3, DATASUBMISSAO, STATUS) "
+                                + "VALUES "
+                                + "('" + savo.getTituloArtigo() + "', "
+                                + "'" + savo.getTemaArtigo() + "', "
+                                + "'" + savo.getAreaArtigo() + "', "
+                                + "'" + autor1.getString("IDPESSOA") + "', "
+                                + "'" + autor2.getString("IDPESSOA") + "', "
+                                + "'" + autor3.getString("IDPESSOA") + "', "
+                                + "'" + savo.getDataSQL() + "', "
+                                + "" + 0 + ")");
+                            }
+                        }
+                    }
+                    else {
+                        //autor 1 e 2
+                        if (autor2.next()){
+                            query.executeUpdate("INSERT INTO ARTIGO "
+                            + "(TITULO, TEMA, AREA, AUTOR1, AUTOR2, DATASUBMISSAO, STATUS) "
+                            + "VALUES "
+                            + "('" + savo.getTituloArtigo() + "', "
+                            + "'" + savo.getTemaArtigo() + "', "
+                            + "'" + savo.getAreaArtigo() + "', "
+                            + "'" + autor1.getString("IDPESSOA") + "', "
+                            + "'" + autor2.getString("IDPESSOA") + "', "
+                            + "'" + savo.getDataSQL() + "', "
+                            + "" + 0 + ")");
+                        }
+                    }
+                } else {
+                    //somente autor 1
+                    query.executeUpdate("INSERT INTO ARTIGO "
+                    + "(TITULO, TEMA, AREA, AUTOR1, DATASUBMISSAO, STATUS) "
+                    + "VALUES "
+                    + "('" + savo.getTituloArtigo() + "', "
+                    + "'" + savo.getTemaArtigo() + "', "
+                    + "'" + savo.getAreaArtigo() + "', "
+                    + "'" + autor1.getString("IDPESSOA") + "', "
+                    + "'" + savo.getDataSQL() + "', "
+                    + "" + 0 + ")");
+                }
+            }
+            
+            cx.desconectar();
+            
+            mensagem = "Artigo submetido com sucesso!";
             
         } catch (SQLException e) {
             

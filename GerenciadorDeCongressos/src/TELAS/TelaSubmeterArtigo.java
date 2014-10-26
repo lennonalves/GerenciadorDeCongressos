@@ -5,16 +5,10 @@
  */
 package TELAS;
 
-import PERS.Conexao;
 import RN.SubmeterArtigoRN;
 import VO.BuscaVO;
 import VO.SubmeterArtigoVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
-import java.util.Date;
 
 /**
  *
@@ -284,79 +278,18 @@ public class TelaSubmeterArtigo extends javax.swing.JFrame {
 
     private void btnSubmeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmeterActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        SubmeterArtigoVO savo = SubmeterArtigoVO.getInstancia();
+        savo.setTituloArtigo(txtTituloArtigo.getText());
+        savo.setTemaArtigo(txtTemaArtigo.getText());
+        savo.setAreaArtigo((String) cbAreaArtigo.getSelectedItem());
+        savo.setNomeAutor1(txtNomeAutor1.getText());
+        savo.setNomeAutor2(txtNomeAutor2.getText());
+        savo.setNomeAutor3(txtNomeAutor3.getText());
+
+        SubmeterArtigoRN sarn = SubmeterArtigoRN.getInstancia();
+        JOptionPane.showMessageDialog(null, sarn.submeteArtigo(savo));
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            Statement consulta = con.createStatement();
-            ResultSet autor1 = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
-                    + "WHERE NOME = '" + txtNomeAutor1.getText() + "'");
-            ResultSet autor2 = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
-                    + "WHERE NOME = '" + txtNomeAutor2.getText() + "'");
-            ResultSet autor3 = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
-                    + "WHERE NOME = '" + txtNomeAutor3.getText() + "'");
-            
-            if (autor1.next()){
-                int status = 0;
-                if (!"".equals(txtNomeAutor2.getText())){
-                    if (!"".equals(txtNomeAutor3.getText())){
-                        //autor 1, 2 e 3
-                        if (autor2.next()){
-                            if (autor3.next()){
-                                query.executeUpdate("INSERT INTO ARTIGO "
-                                + "(TITULO, TEMA, AREA, AUTOR1, AUTOR2, AUTOR3, DATASUBMISSAO, STATUS) "
-                                + "VALUES "
-                                + "('" + txtTituloArtigo.getText() + "', "
-                                + "'" + txtTemaArtigo.getText() + "', "
-                                + "'" + cbAreaArtigo.getSelectedItem() + "', "
-                                + "'" + autor1.getString("IDPESSOA") + "', "
-                                + "'" + autor2.getString("IDPESSOA") + "', "
-                                + "'" + autor3.getString("IDPESSOA") + "', "
-                                + "'" + dataSQL + "', "
-                                + "" + status + ")");
-                            }
-                        }
-                    }
-                    else {
-                        //autor 1 e 2
-                        if (autor2.next()){
-                            query.executeUpdate("INSERT INTO ARTIGO "
-                            + "(TITULO, TEMA, AREA, AUTOR1, AUTOR2, DATASUBMISSAO, STATUS) "
-                            + "VALUES "
-                            + "('" + txtTituloArtigo.getText() + "', "
-                            + "'" + txtTemaArtigo.getText() + "', "
-                            + "'" + cbAreaArtigo.getSelectedItem() + "', "
-                            + "'" + autor1.getString("IDPESSOA") + "', "
-                            + "'" + autor2.getString("IDPESSOA") + "', "
-                            + "'" + dataSQL + "', "
-                            + "" + status + ")");
-                        }
-                    }
-                } else {
-                    //somente autor 1
-                    query.executeUpdate("INSERT INTO ARTIGO "
-                    + "(TITULO, TEMA, AREA, AUTOR1, DATASUBMISSAO, STATUS) "
-                    + "VALUES "
-                    + "('" + txtTituloArtigo.getText() + "', "
-                    + "'" + txtTemaArtigo.getText() + "', "
-                    + "'" + cbAreaArtigo.getSelectedItem() + "', "
-                    + "'" + autor1.getString("IDPESSOA") + "', "
-                    + "'" + dataSQL + "', "
-                    + "" + status + ")");
-                }
-            }
-            
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Artigo submetido com sucesso!");
-            //limparDados();
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
     }//GEN-LAST:event_btnSubmeterActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -426,31 +359,4 @@ public class TelaSubmeterArtigo extends javax.swing.JFrame {
     private javax.swing.JTextField txtTituloArtigo;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the nautor
-     */
-    public int getNautor() {
-        return nautor;
-    }
-
-    /**
-     * @param nautor the nautor to set
-     */
-    public void setNautor(int nautor) {
-        this.nautor = nautor;
-    }
 }

@@ -26,13 +26,13 @@ public class SubmeterArtigoRN {
     
     public String atualizaCampos (SubmeterArtigoVO savo) {
         SubmeterArtigoPers sapers = SubmeterArtigoPers.getInstancia();
-        String mensagem = null;
+        String mensagem = sapers.atualizaCampos(savo);
         return mensagem;
     }
     
     public String submeteArtigo (SubmeterArtigoVO savo) {
         SubmeterArtigoPers sapers = SubmeterArtigoPers.getInstancia();
-        String mensagem = null;
+        String mensagem = sapers.submeteArtigo(savo);
         return mensagem;
     }
     

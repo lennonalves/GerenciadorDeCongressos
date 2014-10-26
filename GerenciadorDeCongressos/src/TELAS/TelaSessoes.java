@@ -225,7 +225,7 @@ public class TelaSessoes extends javax.swing.JFrame {
         svo.setHorario(txtHoraSessao.getText());
         
         SessoesRN srn = SessoesRN.getInstancia();
-        srn.editarSessao(svo);
+        JOptionPane.showMessageDialog(null, srn.editarSessao(svo));
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -238,7 +238,7 @@ public class TelaSessoes extends javax.swing.JFrame {
         svo.setHorario(txtHoraSessao.getText());
         
         SessoesRN srn = SessoesRN.getInstancia();
-        srn.cadastrarSessao(svo);
+        JOptionPane.showMessageDialog(null, srn.cadastrarSessao(svo));
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
