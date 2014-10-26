@@ -11,8 +11,6 @@ package VO;
  * @author lennon
  */
 public class PublicacoesVO {
-    private static String TituloArtigo;
-    private static String Editora;
     
     public static PublicacoesVO instancia;
     
@@ -23,32 +21,31 @@ public class PublicacoesVO {
             instancia = new PublicacoesVO();
         return instancia;
     }
+    
+    private String titulo, editora;
+    private int id = 0;
 
-    /**
-     * @return the TituloArtigo
-     */
-    public static String getTituloArtigo() {
-        return TituloArtigo;
+    public int getId() {
+        return id;
     }
 
-    /**
-     * @param aTituloArtigo the TituloArtigo to set
-     */
-    public static void setTituloArtigo(String aTituloArtigo) {
-        TituloArtigo = aTituloArtigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    /**
-     * @return the Editora
-     */
-    public static String getEditora() {
-        return Editora;
+    public String getTitulo() {
+        return titulo;
     }
 
-    /**
-     * @param aEditora the Editora to set
-     */
-    public static void setEditora(String aEditora) {
-        Editora = aEditora;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
     }
 }

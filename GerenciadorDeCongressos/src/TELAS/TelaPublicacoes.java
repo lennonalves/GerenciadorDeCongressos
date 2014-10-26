@@ -7,6 +7,8 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.PublicacoesRN;
+import VO.BuscaVO;
 import VO.PublicacoesVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,7 +26,6 @@ public class TelaPublicacoes extends javax.swing.JFrame {
      * Creates new form TelaPublicacoes
      */
     
-    private int id = 0;
     public static TelaPublicacoes instancia;
     
     protected TelaPublicacoes() {
@@ -142,64 +143,66 @@ public class TelaPublicacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void preencheTela(int aux){
+        
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM ARTIGO WHERE IDARTIGO = " + getId());
-                if (resultado.next()){
-                    txtTituloArtigo.setText(resultado.getString("TITULO"));
-                    txtEditora.setText(PublicacoesVO.getEditora());
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+            pvo.setTitulo(txtTituloArtigo.getText());
+            pvo.setEditora(txtEditora.getText());
+            
+            PublicacoesRN prn = PublicacoesRN.getInstancia();
+            prn.atualizaTitulo(pvo);
+            
+            txtTituloArtigo.setText(pvo.getTitulo());
+            txtEditora.setText(pvo.getEditora());
             
         }
+        
         if (aux == 2){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM EDITORA WHERE IDEDITORA = " + getId());
-                if (resultado.next()){
-                    txtTituloArtigo.setText(PublicacoesVO.getTituloArtigo());
-                    txtEditora.setText(resultado.getString("NOME"));
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+            pvo.setTitulo(txtTituloArtigo.getText());
+            pvo.setEditora(txtEditora.getText());
+            
+            PublicacoesRN prn = PublicacoesRN.getInstancia();
+            prn.atualizaEditora(pvo);
+            
+            txtTituloArtigo.setText(pvo.getTitulo());
+            txtEditora.setText(pvo.getEditora());
             
         }
     }
     
     private void btnTituloArtigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTituloArtigoActionPerformed
         // TODO add your handling code here:
-        PublicacoesVO.setTituloArtigo(txtTituloArtigo.getText());
-        PublicacoesVO.setEditora(txtEditora.getText());
+        
+        PublicacoesVO pvo = PublicacoesVO.getInstancia();
+        pvo.setTitulo(txtTituloArtigo.getText());
+        pvo.setEditora(txtEditora.getText());
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(9);
         
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(9);
-        Buscar.setVisible(true);
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
+        
     }//GEN-LAST:event_btnTituloArtigoActionPerformed
 
     private void btnEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditoraActionPerformed
         // TODO add your handling code here:
-        PublicacoesVO.setTituloArtigo(txtTituloArtigo.getText());
-        PublicacoesVO.setEditora(txtEditora.getText());
+        
+        PublicacoesVO pvo = PublicacoesVO.getInstancia();
+        pvo.setTitulo(txtTituloArtigo.getText());
+        pvo.setEditora(txtEditora.getText());
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(10);
         
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(10);
-        Buscar.setVisible(true);
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
+        
     }//GEN-LAST:event_btnEditoraActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -209,36 +212,14 @@ public class TelaPublicacoes extends javax.swing.JFrame {
 
     private void btnPublicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublicarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        PublicacoesVO pvo = PublicacoesVO.getInstancia();
+        pvo.setTitulo(txtTituloArtigo.getText());
+        pvo.setEditora(txtEditora.getText());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            Statement consulta = con.createStatement();
-            ResultSet tituloartigo = consulta.executeQuery("SELECT IDARTIGO FROM ARTIGO "
-                    + "WHERE TITULO = '" + txtTituloArtigo.getText() + "'");
-            ResultSet editora = consulta.executeQuery("SELECT IDEDITORA FROM EDITORA "
-                    + "WHERE NOME = '" + txtEditora.getText() + "'");
-            
-            if (tituloartigo.next()){
-                if (editora.next()){
-                    query.executeUpdate("INSERT INTO PUBLICACOES "
-                    + "(TITULOARTIGO, EDITORA) "
-                    + "VALUES "
-                    + "(" + tituloartigo.getString("IDARTIGO") + ", "
-                    + "'" + editora.getString("IDEDITORA") + "')");
-                }
-            }
-            
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Publicacao cadastrada com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        PublicacoesRN prn = PublicacoesRN.getInstancia();
+        prn.publicar(pvo);
+        
     }//GEN-LAST:event_btnPublicarActionPerformed
 
     /**
@@ -289,17 +270,4 @@ public class TelaPublicacoes extends javax.swing.JFrame {
     private javax.swing.JTextField txtTituloArtigo;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 }
