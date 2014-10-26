@@ -7,6 +7,9 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.SessoesRN;
+import VO.BuscaVO;
+import VO.SessoesVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +26,6 @@ public class TelaSessoes extends javax.swing.JFrame {
      * Creates new form TelaSessoes
      */
     
-    private int id = 0;
     public static TelaSessoes instancia;
     
     protected TelaSessoes() {
@@ -178,10 +180,13 @@ public class TelaSessoes extends javax.swing.JFrame {
 
     private void btnModeradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModeradorActionPerformed
         // TODO add your handling code here:
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(11);
+        
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(11);
-        Buscar.setVisible(true);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_btnModeradorActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -191,103 +196,62 @@ public class TelaSessoes extends javax.swing.JFrame {
 
     private void lblImgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImgBuscarMouseClicked
         // TODO add your handling code here:
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(7);
+        
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(7);
-        Buscar.setVisible(true);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblImgBuscarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
         // TODO add your handling code here:
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(7);
+        
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(7);
-        Buscar.setVisible(true);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        SessoesVO svo = SessoesVO.getInstancia();
+        svo.setModerador(txtModerador.getText());
+        svo.setArea((String) cbAreaSessao.getSelectedItem());
+        svo.setHorario(txtHoraSessao.getText());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            Statement consulta = con.createStatement();
-            ResultSet moderador = consulta.executeQuery("SELECT P.IDPESSOA FROM PESSOA P JOIN SESSAO S "
-                    + "ON P.IDPESSOA = S.IDPESSOA WHERE P.NOME = '" + txtModerador.getText() + "'");
-            
-            if (moderador.next()){
-                query.executeUpdate("UPDATE SESSAO SET "
-                    + "IDPESSOA = '" + moderador.getString("IDPESSOA") + "', "
-                    + "AREA = '" + cbAreaSessao.getSelectedItem() + "', "
-                    + "HORARIO = '" + txtHoraSessao.getText() + "' "
-                    + "WHERE IDSESSAO = " + getId());
-            }
-            
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Sessao editada com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        SessoesRN srn = SessoesRN.getInstancia();
+        srn.editarSessao(svo);
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        SessoesVO svo = SessoesVO.getInstancia();
+        svo.setModerador(txtModerador.getText());
+        svo.setArea((String) cbAreaSessao.getSelectedItem());
+        svo.setHorario(txtHoraSessao.getText());
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            Statement consulta = con.createStatement();
-            ResultSet moderador = consulta.executeQuery("SELECT IDPESSOA FROM PESSOA "
-                    + "WHERE NOME = '" + txtModerador.getText() + "'");
-            
-            if (moderador.next()){
-                query.executeUpdate("INSERT INTO SESSAO "
-                    + "(IDPESSOA, AREA, HORARIO) "
-                    + "VALUES "
-                    + "(" + moderador.getString("IDPESSOA") + ", "
-                    + "'" + cbAreaSessao.getSelectedItem() + "', "
-                    + "'" + txtHoraSessao.getText() + "')");
-            }
-            
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Sessao cadastrada com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        SessoesRN srn = SessoesRN.getInstancia();
+        srn.cadastrarSessao(svo);
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     void preencheTela(int aux){
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM SESSAO WHERE IDSESSAO = " + getId());
-                ResultSet moderador = consulta.executeQuery("SELECT NOME FROM PESSOA P JOIN SESSAO S "
-                        + "ON P.IDPESSOA = S.IDPESSOA WHERE IDSESSAO = " + getId());
-                if (resultado.next()){
-                    if (moderador.next()){
-                        txtModerador.setText(moderador.getString("NOME"));
-                        cbAreaSessao.setSelectedItem(resultado.getString("AREA"));
-                        txtHoraSessao.setText(resultado.getString("HORARIO"));
-                    }
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            SessoesVO svo = SessoesVO.getInstancia();
+            SessoesRN srn = SessoesRN.getInstancia();
+            srn.atualizaCampos(svo);
+            
+            txtModerador.setText(svo.getModerador());
+            cbAreaSessao.setSelectedItem(svo.getArea());
+            txtHoraSessao.setText(svo.getHorario());
             
         }
     }
@@ -295,20 +259,13 @@ public class TelaSessoes extends javax.swing.JFrame {
     void preencheModerador(int aux){
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet moderador = consulta.executeQuery("SELECT NOME FROM PESSOA P JOIN SESSAO S "
-                        + "ON P.IDPESSOA = S.IDPESSOA WHERE IDSESSAO = " + getId());
-                if (moderador.next()){
-                        txtModerador.setText(moderador.getString("NOME"));
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            SessoesVO svo = SessoesVO.getInstancia();
+            SessoesRN srn = SessoesRN.getInstancia();
+            srn.atualizaModerador(svo);
+            
+            txtModerador.setText(svo.getModerador());
+            cbAreaSessao.setSelectedItem(svo.getArea());
+            txtHoraSessao.setText(svo.getHorario());
             
         }
     }
@@ -365,17 +322,4 @@ public class TelaSessoes extends javax.swing.JFrame {
     private javax.swing.JTextField txtModerador;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 }
