@@ -7,6 +7,9 @@
 package TELAS;
 
 import PERS.Conexao;
+import RN.PatrocinadoresRN;
+import VO.BuscaVO;
+import VO.PatrocinadoresVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +26,6 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
      * Creates new form TelaPatrocinadores
      */
     
-    private int id = 0;
     public static TelaPatrocinadores instancia;
     
     protected TelaPatrocinadores() {
@@ -242,93 +244,71 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
     private void lblImgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImgBuscarMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(4);
-        Buscar.setVisible(true);
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(4);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblImgBuscarMouseClicked
 
     private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        TelaBuscar Buscar = TelaBuscar.getInstancia();
-        Buscar.setDefinirTela(4);
-        Buscar.setVisible(true);
+        
+        BuscaVO bvo = BuscaVO.getInstancia();
+        bvo.setDefinirTela(4);
+        
+        TelaBuscar telaBuscar = TelaBuscar.getInstancia();
+        telaBuscar.setVisible(true);
     }//GEN-LAST:event_lblBuscarMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        PatrocinadoresVO pvo = PatrocinadoresVO.getInstancia();
+        pvo.setNome(txtNomePatrocinador.getText());
+        pvo.setCnpj(txtCNPJPatrocinador.getText());
+        pvo.setEndereco(txtEnderecoPatrocinador.getText());
+        pvo.setTelefone(txtTelefonePatrocinador.getText());
+        pvo.setEmail(txtEmailPatrocinador.getText());
+        pvo.setValor(Integer.parseInt(txtValorPatrocinio.getText()));
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("UPDATE PATROCINADOR SET "
-                    + "NOME = '" + txtNomePatrocinador.getText() + "', "
-                    + "CNPJ = '" + txtCNPJPatrocinador.getText() + "', "
-                    + "ENDERECO = '" + txtEnderecoPatrocinador.getText() + "', "
-                    + "TELEFONE = '" + txtTelefonePatrocinador.getText() + "', "
-                    + "EMAIL = '" + txtEmailPatrocinador.getText() + "', "
-                    + "VALORPATROCINIO = '" + txtValorPatrocinio.getText() + "' "
-                    + "WHERE IDPATROCINADOR = " + getId());
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Patrocinador editado com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
+        prn.editarPatrocinador(pvo);
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        Conexao cx = Conexao.getInstancia();
         
-        //JOptionPane.showMessageDialog(null, this.getId());
+        PatrocinadoresVO pvo = PatrocinadoresVO.getInstancia();
+        pvo.setNome(txtNomePatrocinador.getText());
+        pvo.setCnpj(txtCNPJPatrocinador.getText());
+        pvo.setEndereco(txtEnderecoPatrocinador.getText());
+        pvo.setTelefone(txtTelefonePatrocinador.getText());
+        pvo.setEmail(txtEmailPatrocinador.getText());
+        pvo.setValor(Integer.parseInt(txtValorPatrocinio.getText()));
         
-        try {
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("INSERT INTO PATROCINADOR "
-                    + "(NOME, CNPJ, ENDERECO, TELEFONE, EMAIL, VALORPATROCINIO) "
-                    + "VALUES "
-                    + "('" + txtNomePatrocinador.getText() + "', "
-                    + "'" + txtCNPJPatrocinador.getText() + "', "
-                    + "'" + txtEnderecoPatrocinador.getText() + "', "
-                    + "'" + txtTelefonePatrocinador.getText() + "', "
-                    + "'" + txtEmailPatrocinador.getText() + "', "
-                    + "'" + txtValorPatrocinio.getText() + "')");
-            cx.desconectar();
-            
-            JOptionPane.showMessageDialog(null, "Patrocinador cadastrado com sucesso!");
-            
-        } catch (SQLException e){
-                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-        }
+        PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
+        prn.editarPatrocinador(pvo);
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     void preencheTela(int aux){
+        
         if (aux == 1){
             
-            Conexao cx = Conexao.getInstancia();
-        
-            try {
-                Connection con = cx.conectar();
-                Statement consulta = con.createStatement();
-                ResultSet resultado = consulta.executeQuery("SELECT * FROM PATROCINADOR WHERE IDPATROCINADOR = " + getId());
-                if (resultado.next()){
-                    txtNomePatrocinador.setText(resultado.getString("NOME"));
-                    txtCNPJPatrocinador.setText(resultado.getString("CNPJ"));
-                    txtEnderecoPatrocinador.setText(resultado.getString("ENDERECO"));
-                    txtTelefonePatrocinador.setText(resultado.getString("TELEFONE"));
-                    txtEmailPatrocinador.setText(resultado.getString("EMAIL"));
-                    txtValorPatrocinio.setText(resultado.getString("VALORPATROCINIO"));
-                }
-                cx.desconectar();
-            } catch (SQLException e){
-                    JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
-            }
+            PatrocinadoresVO pvo = PatrocinadoresVO.getInstancia();
+            PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
+            prn.editarPatrocinador(pvo);
+            
+            txtNomePatrocinador.setText(pvo.getNome());
+            txtCNPJPatrocinador.setText(pvo.getCnpj());
+            txtEnderecoPatrocinador.setText(pvo.getEndereco());
+            txtTelefonePatrocinador.setText(pvo.getTelefone());
+            txtEmailPatrocinador.setText(pvo.getEmail());
+            txtValorPatrocinio.setText(Double.toString(pvo.getValor()));
             
         }
     }
@@ -390,17 +370,4 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorPatrocinio;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 }

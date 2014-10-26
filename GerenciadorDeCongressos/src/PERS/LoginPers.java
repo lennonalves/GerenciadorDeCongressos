@@ -58,7 +58,7 @@ public class LoginPers {
                 } else {
 
                     MenuVO mvo = MenuVO.getInstancia();
-                    mvo.setFuncao((resultado.getString("FUNCAO")));
+                    mvo.setFuncao(resultado.getString("FUNCAO"));
                     
                     TelaMenu telaMenu = TelaMenu.getInstancia();
                     telaMenu.setVisible(true);

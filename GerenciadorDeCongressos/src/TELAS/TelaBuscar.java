@@ -11,6 +11,7 @@ import VO.BuscaVO;
 import VO.CongressoVO;
 import VO.EditorasVO;
 import VO.JulgarArtigoVO;
+import VO.PatrocinadoresVO;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -484,10 +485,14 @@ public class TelaBuscar extends javax.swing.JFrame {
         }
         
         if (bvo.getDefinirTela() == 4){ //Patrocinador
-            TelaPatrocinadores Patrocinador = TelaPatrocinadores.getInstancia(); //chama instancia
-            Patrocinador.setId(bvo.getLinha()); //recebe id
-            Patrocinador.preencheTela(1); //liga flag
-            Patrocinador.setVisible(true); //chama tela buscada
+            
+            PatrocinadoresVO pvo = PatrocinadoresVO.getInstancia();
+            pvo.setId(bvo.getLinha());
+            
+            TelaPatrocinadores telaPatrocinadores = TelaPatrocinadores.getInstancia();
+            telaPatrocinadores.preencheTela(1);
+            telaPatrocinadores.setVisible(true);
+            
         }
         
         if (bvo.getDefinirTela() == 5){ //Usuários
@@ -527,26 +532,26 @@ public class TelaBuscar extends javax.swing.JFrame {
             Sessao.setVisible(true); //chama tela buscada
         }
         
-        if (bvo.getDefinirTela() == 9){ //Artigo Publicacao
-            PublicacoesVO pvo = PublicacoesVO.getInstancia();
-            pvo.setId(bvo.getLinha());
-            
-            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
-            publica.preencheTela(1);
-            publica.setVisible(true);
-            
-        }
-        
-        if (bvo.getDefinirTela() == 10){ //Editora Publicacao
-            
-            PublicacoesVO pvo = PublicacoesVO.getInstancia();
-            pvo.setId(bvo.getLinha());
-            
-            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
-            publica.preencheTela(2);
-            publica.setVisible(true);
-            
-        }
+//        if (bvo.getDefinirTela() == 9){ //Artigo Publicacao
+//            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+//            pvo.setId(bvo.getLinha());
+//            
+//            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
+//            publica.preencheTela(1);
+//            publica.setVisible(true);
+//            
+//        }
+//        
+//        if (bvo.getDefinirTela() == 10){ //Editora Publicacao
+//            
+//            PublicacoesVO pvo = PublicacoesVO.getInstancia();
+//            pvo.setId(bvo.getLinha());
+//            
+//            TelaPublicacoes publica = TelaPublicacoes.getInstancia();
+//            publica.preencheTela(2);
+//            publica.setVisible(true);
+//            
+//        }
         
         if (bvo.getDefinirTela() == 11){ //Artigo Julgar
             

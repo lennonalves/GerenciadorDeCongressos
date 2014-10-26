@@ -233,76 +233,76 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void btnCongressosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongressosActionPerformed
         // TODO add your handling code here:
-        TelaCongresso Congresso = TelaCongresso.getInstancia();
-        Congresso.setVisible(true);
+        TelaCongresso telaCongresso = TelaCongresso.getInstancia();
+        telaCongresso.setVisible(true);
     }//GEN-LAST:event_btnCongressosActionPerformed
 
     private void btnPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoasActionPerformed
         // TODO add your handling code here:
-        TelaPessoas Pessoas = TelaPessoas.getInstancia();
-        Pessoas.setVisible(true);
+        TelaPessoas telaPessoas = TelaPessoas.getInstancia();
+        telaPessoas.setVisible(true);
     }//GEN-LAST:event_btnPessoasActionPerformed
 
     private void btnEditorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditorasActionPerformed
         // TODO add your handling code here:
-        TelaEditoras Editoras = TelaEditoras.getInstancia();
-        Editoras.setVisible(true);
+        TelaEditoras telaEditoras = TelaEditoras.getInstancia();
+        telaEditoras.setVisible(true);
     }//GEN-LAST:event_btnEditorasActionPerformed
 
     private void btnArtigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArtigosActionPerformed
         // TODO add your handling code here:
-        TelaSubmeterArtigo Artigos = TelaSubmeterArtigo.getInstancia();
-        Artigos.setVisible(true);
+        TelaSubmeterArtigo telaSubmeter = TelaSubmeterArtigo.getInstancia();
+        telaSubmeter.setVisible(true);
     }//GEN-LAST:event_btnArtigosActionPerformed
 
     private void btnSessoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSessoesActionPerformed
         // TODO add your handling code here:
-        TelaSessoes Sessoes = TelaSessoes.getInstancia();
-        Sessoes.setVisible(true);
+        TelaSessoes telaSessoes = TelaSessoes.getInstancia();
+        telaSessoes.setVisible(true);
     }//GEN-LAST:event_btnSessoesActionPerformed
 
     private void btnPublicacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublicacoesActionPerformed
         // TODO add your handling code here:
-        TelaPublicacoes Publicacoes = TelaPublicacoes.getInstancia();
-        Publicacoes.setVisible(true);
+        TelaPublicacoes telaPublicacoes = TelaPublicacoes.getInstancia();
+        telaPublicacoes.setVisible(true);
     }//GEN-LAST:event_btnPublicacoesActionPerformed
 
     private void btnJulgarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJulgarActionPerformed
         // TODO add your handling code here:
-        TelaJulgarArtigo JulgarArtigo = TelaJulgarArtigo.getInstancia();
-        JulgarArtigo.setVisible(true);
+        TelaJulgarArtigo telaJulgar = TelaJulgarArtigo.getInstancia();
+        telaJulgar.setVisible(true);
     }//GEN-LAST:event_btnJulgarActionPerformed
 
     private void btnFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinanceiroActionPerformed
         // TODO add your handling code here:
-        TelaControleFinanceiro Financas = TelaControleFinanceiro.getInstancia();
-        Financas.setVisible(true);
+        TelaControleFinanceiro telaFinancas = TelaControleFinanceiro.getInstancia();
+        telaFinancas.setVisible(true);
     }//GEN-LAST:event_btnFinanceiroActionPerformed
 
     private void btnConvitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvitesActionPerformed
         // TODO add your handling code here:
-        TelaEnviarConvites Convites = TelaEnviarConvites.getInstancia();
-        Convites.setVisible(true);
+        TelaEnviarConvites telaConvites = TelaEnviarConvites.getInstancia();
+        telaConvites.setVisible(true);
     }//GEN-LAST:event_btnConvitesActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Até logo!");
         this.setVisible(false);
-        TelaLogin Login = TelaLogin.getInstancia();
-        Login.setVisible(true);
+        TelaLogin telaLogin = TelaLogin.getInstancia();
+        telaLogin.setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnPatrocinadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatrocinadoresActionPerformed
         // TODO add your handling code here:
-        TelaPatrocinadores Patrocinadores = TelaPatrocinadores.getInstancia();
-        Patrocinadores.setVisible(true);
+        TelaPatrocinadores telaPatrocinadores = TelaPatrocinadores.getInstancia();
+        telaPatrocinadores.setVisible(true);
     }//GEN-LAST:event_btnPatrocinadoresActionPerformed
 
     private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
         // TODO add your handling code here:
-        TelaUsuarios Usuarios = TelaUsuarios.getInstancia();
-        Usuarios.setVisible(true);
+        TelaUsuarios telaUsuarios = TelaUsuarios.getInstancia();
+        telaUsuarios.setVisible(true);
     }//GEN-LAST:event_btnUserActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -315,6 +315,7 @@ public class TelaMenu extends javax.swing.JFrame {
         MenuVO mvo = MenuVO.getInstancia();
         
         if (mvo.getFuncao().equals("Comite de Programa")){
+            
             btnCongressos.setEnabled(true);
             btnEditoras.setEnabled(true);
             btnPessoas.setEnabled(true);
@@ -327,8 +328,11 @@ public class TelaMenu extends javax.swing.JFrame {
             btnConvites.setEnabled(false);
             btnUser.setEnabled(false);
             btnSair.setEnabled(true);
+            
         }
+        
         else if (mvo.getFuncao().equals("Comite Organizador")){
+            
             btnCongressos.setEnabled(false);
             btnEditoras.setEnabled(false);
             btnPessoas.setEnabled(true);
@@ -341,8 +345,11 @@ public class TelaMenu extends javax.swing.JFrame {
             btnConvites.setEnabled(true);
             btnUser.setEnabled(false);
             btnSair.setEnabled(true);
+            
         }
+        
         else if (mvo.getFuncao().equals("admin")){
+            
             btnCongressos.setEnabled(true);
             btnEditoras.setEnabled(true);
             btnPessoas.setEnabled(true);
@@ -355,7 +362,9 @@ public class TelaMenu extends javax.swing.JFrame {
             btnConvites.setEnabled(true);
             btnUser.setEnabled(true);
             btnSair.setEnabled(true);
+            
         }
+        
     }//GEN-LAST:event_formWindowActivated
     
     public void setBtnArtigos(boolean set){
