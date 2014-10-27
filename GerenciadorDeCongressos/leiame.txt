@@ -1,8 +1,0 @@
-//Lennon Alves
-
-25/10/2014 - Modificando as classes, refatorando
-e incluindo as camadas VO, RN e PERS.
-
---------------------------------------------
-
-//Victor Ambiel
