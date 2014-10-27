@@ -248,11 +248,11 @@ public class TelaEditoras extends javax.swing.JFrame {
 
     private void limparDados() {
         
-        txtNomeEditora.setText("");
-        txtCNPJEditora.setText("");
-        txtEnderecoEditora.setText("");
-        txtTelefoneEditora.setText("");
-        txtEmailEditora.setText("");
+//        txtNomeEditora.setText("");
+//        txtCNPJEditora.setText("");
+//        txtEnderecoEditora.setText("");
+//        txtTelefoneEditora.setText("");
+//        txtEmailEditora.setText("");
         
     }
     
@@ -301,7 +301,7 @@ public class TelaEditoras extends javax.swing.JFrame {
             
             EditorasVO evo = EditorasVO.getInstancia();
             EditorasRN ern = EditorasRN.getInstancia();
-            ern.cadastrarEditoras(evo);
+            ern.atualizaCampos(evo);
             
             txtNomeEditora.setText(evo.getNome());
             txtCNPJEditora.setText(evo.getCnpj());

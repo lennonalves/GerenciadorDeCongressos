@@ -296,7 +296,7 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
             
             PatrocinadoresVO pvo = PatrocinadoresVO.getInstancia();
             PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
-            prn.editarPatrocinador(pvo);
+            prn.atualizaCampos(pvo);
             
             txtNomePatrocinador.setText(pvo.getNome());
             txtCNPJPatrocinador.setText(pvo.getCnpj());

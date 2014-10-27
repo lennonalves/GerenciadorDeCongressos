@@ -38,7 +38,7 @@ public class PatrocinadoresRN {
     
     public String atualizaCampos (PatrocinadoresVO pvo) {
         PatrocinadoresPers ppers = PatrocinadoresPers.getInstancia();
-        String mensagem = ppers.cadastrarPatrocinador(pvo);
+        String mensagem = ppers.atualizaCampos(pvo);
         return mensagem;
     }
     
