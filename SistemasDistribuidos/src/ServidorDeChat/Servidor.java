@@ -10,6 +10,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -148,14 +149,9 @@ public class Servidor extends javax.swing.JFrame {
             flag = false;
         }
     }//GEN-LAST:event_btnLigarActionPerformed
-
-    private void atualizarListaClientes(){
-        
-    }
     
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        atualizarListaClientes();
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void atualizarListaCliente(){

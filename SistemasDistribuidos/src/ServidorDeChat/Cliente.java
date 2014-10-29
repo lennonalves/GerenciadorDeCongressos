@@ -123,27 +123,8 @@ public class Cliente extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-//        try 
-//        {
-//            System.out.println("Status: Cliente Conectado");
-//            String mensagem = txtMensagem.getText();
-//            DatagramSocket conexao = new DatagramSocket();
-//            byte[] m = mensagem.getBytes();
-//            InetAddress aHost = InetAddress.getByName(txtIP.getText());
-//            int serverPort = Integer.parseInt(txtPorta.getText());
-//            DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
-//            conexao.send(request);
-//            byte[] buffer = new byte[256];
-//            DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-//            conexao.receive(reply);
-//            System.out.println("Resposta: " + new String(reply.getData()));
-//        } catch (IOException e)
-//        {  
-//            System.out.println("IOException: " + e);
-//            System.out.println("Status: Cliente Desconectado");
-//        }
     }//GEN-LAST:event_btnEnviarActionPerformed
-
+    
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
         DatagramSocket conexao = null;
@@ -170,12 +151,7 @@ public class Cliente extends javax.swing.JFrame {
                 
                 DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
                 conexao.send(request);
-//                
-//                byte[] buffer = new byte[256];
-//                DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-//                
-//                conexao.receive(reply);
-//                System.out.println("Resposta: " + new String(reply.getData()));
+                
             } catch (IOException e)
             {  
                 System.out.println("Status: Cliente Desconectado");
