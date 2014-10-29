@@ -6,14 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.UsuariosRN;
 import VO.BuscaVO;
 import VO.UsuariosVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -219,8 +214,15 @@ public class TelaUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeUserActionPerformed
 
+    void limparDados() {
+        txtNomeUser.setText("");
+        txtSenhaUser.setText("");
+        txtUser.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -236,14 +238,9 @@ public class TelaUsuarios extends javax.swing.JFrame {
         UsuariosRN urn = UsuariosRN.getInstancia();
         JOptionPane.showMessageDialog(null, urn.editaUsuario(uvo));
         
+        limparDados();
+        
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void limparDados()
-    {
-        txtNomeUser.setText("");
-        txtUser.setText("");
-        txtSenhaUser.setText("");
-    }
     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
@@ -256,6 +253,8 @@ public class TelaUsuarios extends javax.swing.JFrame {
         
         UsuariosRN urn = UsuariosRN.getInstancia();
         JOptionPane.showMessageDialog(null, urn.cadastraUsuario(uvo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

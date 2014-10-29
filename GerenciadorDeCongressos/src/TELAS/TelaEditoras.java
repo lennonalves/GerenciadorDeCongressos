@@ -6,14 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.EditorasRN;
 import VO.BuscaVO;
 import VO.EditorasVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -226,8 +221,17 @@ public class TelaEditoras extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailEditoraActionPerformed
 
+    void limparDados() {
+        txtCNPJEditora.setText("");
+        txtEmailEditora.setText("");
+        txtEnderecoEditora.setText("");
+        txtNomeEditora.setText("");
+        txtTelefoneEditora.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -244,17 +248,9 @@ public class TelaEditoras extends javax.swing.JFrame {
         EditorasRN ern = EditorasRN.getInstancia();
         JOptionPane.showMessageDialog(null, ern.editarEditoras(evo));
         
+        limparDados();
+        
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void limparDados() {
-        
-//        txtNomeEditora.setText("");
-//        txtCNPJEditora.setText("");
-//        txtEnderecoEditora.setText("");
-//        txtTelefoneEditora.setText("");
-//        txtEmailEditora.setText("");
-        
-    }
     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
@@ -268,6 +264,8 @@ public class TelaEditoras extends javax.swing.JFrame {
         
         EditorasRN ern = EditorasRN.getInstancia();
         JOptionPane.showMessageDialog(null, ern.cadastrarEditoras(evo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

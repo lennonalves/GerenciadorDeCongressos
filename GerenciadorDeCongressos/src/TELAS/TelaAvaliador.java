@@ -162,6 +162,10 @@ public class TelaAvaliador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    void limparDados() {
+        txtAvaliacao.setText("");
+    }
+    
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
         
@@ -172,6 +176,8 @@ public class TelaAvaliador extends javax.swing.JFrame {
         
         AvaliadorRN arn = AvaliadorRN.getInstancia();
         JOptionPane.showMessageDialog(null, arn.avaliaArtigo(avo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 

@@ -6,14 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.SessoesRN;
 import VO.BuscaVO;
 import VO.SessoesVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -189,8 +184,14 @@ public class TelaSessoes extends javax.swing.JFrame {
         telaBuscar.setVisible(true);
     }//GEN-LAST:event_btnModeradorActionPerformed
 
+    void limparDados() {
+        txtHoraSessao.setText("");
+        txtModerador.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -227,6 +228,8 @@ public class TelaSessoes extends javax.swing.JFrame {
         SessoesRN srn = SessoesRN.getInstancia();
         JOptionPane.showMessageDialog(null, srn.editarSessao(svo));
         
+        limparDados();
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -239,6 +242,8 @@ public class TelaSessoes extends javax.swing.JFrame {
         
         SessoesRN srn = SessoesRN.getInstancia();
         JOptionPane.showMessageDialog(null, srn.cadastrarSessao(svo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

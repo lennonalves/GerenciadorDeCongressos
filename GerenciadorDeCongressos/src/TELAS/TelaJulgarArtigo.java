@@ -6,15 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.JulgarArtigoRN;
 import VO.BuscaVO;
 import VO.JulgarArtigoVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -195,8 +189,16 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTituloArtigoActionPerformed
 
+    void limparDados() {
+        txtAvaliacao1.setText("");
+        txtAvaliacao2.setText("");
+        txtAvaliacao3.setText("");
+        txtTituloArtigo.setText(""); 
+   }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -212,6 +214,8 @@ public class TelaJulgarArtigo extends javax.swing.JFrame {
         
         JulgarArtigoRN jarn = JulgarArtigoRN.getInstancia();
         JOptionPane.showMessageDialog(null, jarn.julgarArtigo(javo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnSubmeterActionPerformed
 

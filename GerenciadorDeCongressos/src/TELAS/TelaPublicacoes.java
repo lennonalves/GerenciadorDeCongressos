@@ -6,14 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.PublicacoesRN;
 import VO.BuscaVO;
 import VO.PublicacoesVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -205,8 +200,14 @@ public class TelaPublicacoes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEditoraActionPerformed
 
+    void limparDados() {
+        txtEditora.setText("");
+        txtTituloArtigo.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -219,6 +220,8 @@ public class TelaPublicacoes extends javax.swing.JFrame {
         
         PublicacoesRN prn = PublicacoesRN.getInstancia();
         JOptionPane.showMessageDialog(null, prn.publicar(pvo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnPublicarActionPerformed
 

@@ -6,14 +6,9 @@
 
 package TELAS;
 
-import PERS.Conexao;
 import RN.CongressoRN;
 import VO.BuscaVO;
 import VO.CongressoVO;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -314,6 +309,21 @@ public class TelaCongresso extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    void LimparDados() {
+        txtCNPJCongresso.setText("");
+        txtEdicaoCongresso.setText("");
+        txtEnderecoCongresso.setText("");
+        txtFimCongresso.setText("");
+        txtInicioCongresso.setText("");
+        txtNomeCongresso.setText("");
+        txtNumParticipantes.setText("");
+        txtPrazoAvaliacao.setText("");
+        txtPrazoInscricao.setText("");
+        txtPrazoSubmissao.setText("");
+        txtTemaCongresso.setText("");
+        txtValorInscricao.setText("");
+    }
+    
     private void txtNomeCongressoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeCongressoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeCongressoActionPerformed
@@ -336,6 +346,7 @@ public class TelaCongresso extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -375,6 +386,8 @@ public class TelaCongresso extends javax.swing.JFrame {
         
         CongressoRN crn = CongressoRN.getInstancia();
         JOptionPane.showMessageDialog(null, crn.cadastraCongresso(cvo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -419,6 +432,8 @@ public class TelaCongresso extends javax.swing.JFrame {
         
         CongressoRN crn = CongressoRN.getInstancia();
         JOptionPane.showMessageDialog(null, crn.editaCongresso(cvo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnEditarActionPerformed
 

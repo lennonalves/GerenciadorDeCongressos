@@ -275,8 +275,18 @@ public class TelaPessoas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInstituicaoPessoaActionPerformed
 
+    void limparDados() {
+        txtEmailPessoa.setText("");
+        txtEnderecoPessoa.setText("");
+        txtInstituicaoPessoa.setText("");
+        txtNomePessoa.setText("");
+        txtTelefonePessoa.setText("");
+        txtTipoPessoa.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -319,6 +329,8 @@ public class TelaPessoas extends javax.swing.JFrame {
         PessoasRN prn = PessoasRN.getInstancia();
         JOptionPane.showMessageDialog(null, prn.editaPessoas(pvo));
         
+        limparDados();
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -337,6 +349,8 @@ public class TelaPessoas extends javax.swing.JFrame {
         
         PessoasRN prn = PessoasRN.getInstancia();
         JOptionPane.showMessageDialog(null, prn.cadastraPessoas(pvo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

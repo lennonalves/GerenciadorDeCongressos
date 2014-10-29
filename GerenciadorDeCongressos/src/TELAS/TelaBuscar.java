@@ -183,6 +183,8 @@ public class TelaBuscar extends javax.swing.JFrame {
         
         BuscaVO bvo = BuscaVO.getInstancia();
         
+        bvo.dtm.setNumRows(0);
+        
         if (bvo.getDefinirTela() == 1){ //Congresso
             TelaCongresso telaCongresso = TelaCongresso.getInstancia(); //chama instancia
             telaCongresso.setVisible(true); //chama tela buscada
@@ -305,6 +307,9 @@ public class TelaBuscar extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         BuscaVO bvo = BuscaVO.getInstancia();
+        
+        bvo.dtm.setNumRows(0);
+        
         this.setVisible(false);
         
         if (bvo.getDefinirTela() == 1){ //Congresso

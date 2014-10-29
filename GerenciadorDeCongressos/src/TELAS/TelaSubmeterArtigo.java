@@ -290,10 +290,21 @@ public class TelaSubmeterArtigo extends javax.swing.JFrame {
         SubmeterArtigoRN sarn = SubmeterArtigoRN.getInstancia();
         JOptionPane.showMessageDialog(null, sarn.submeteArtigo(savo));
         
+        limparDados();
+        
     }//GEN-LAST:event_btnSubmeterActionPerformed
 
+    void limparDados() {
+        txtNomeAutor1.setText("");
+        txtNomeAutor2.setText("");
+        txtNomeAutor3.setText("");
+        txtTemaArtigo.setText("");
+        txtTituloArtigo.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 

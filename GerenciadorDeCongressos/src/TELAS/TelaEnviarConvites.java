@@ -104,8 +104,13 @@ public class TelaEnviarConvites extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
+    void limparDados() {
+        txtMensagem.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -119,6 +124,8 @@ public class TelaEnviarConvites extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, crn.enviarConvite(cvo));
         
         this.setVisible(false);
+        
+        limparDados();
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 

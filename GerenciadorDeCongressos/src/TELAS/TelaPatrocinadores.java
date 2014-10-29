@@ -231,8 +231,18 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCNPJPatrocinadorActionPerformed
 
+    void limparDados() {
+        txtCNPJPatrocinador.setText("");
+        txtEmailPatrocinador.setText("");
+        txtEnderecoPatrocinador.setText("");
+        txtNomePatrocinador.setText("");
+        txtTelefonePatrocinador.setText("");
+        txtValorPatrocinio.setText("");
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        limparDados();        
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -272,6 +282,8 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
         PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
         JOptionPane.showMessageDialog(null, prn.editarPatrocinador(pvo));
         
+        limparDados();
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -287,6 +299,8 @@ public class TelaPatrocinadores extends javax.swing.JFrame {
         
         PatrocinadoresRN prn = PatrocinadoresRN.getInstancia();
         JOptionPane.showMessageDialog(null, prn.cadastrarPatrocinador(pvo));
+        
+        limparDados();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
