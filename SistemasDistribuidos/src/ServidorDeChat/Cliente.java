@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,6 +37,7 @@ public class Cliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        imgAtualizar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtIP = new javax.swing.JTextField();
@@ -52,12 +55,30 @@ public class Cliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(655, 320));
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
         getContentPane().setLayout(null);
+
+        imgAtualizar.setFont(new java.awt.Font("Eras Medium ITC", 0, 14)); // NOI18N
+        imgAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        imgAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/atualizar32.png"))); // NOI18N
+        imgAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgAtualizarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(imgAtualizar);
+        imgAtualizar.setBounds(600, 10, 40, 40);
 
         jLabel3.setFont(new java.awt.Font("PakType Naqsh", 0, 24)); // NOI18N
         jLabel3.setText("Conexão do Cliente");
@@ -179,7 +200,6 @@ public class Cliente extends javax.swing.JFrame {
                 
             } catch (IOException e)
             {  
-                System.out.println("Status: Cliente Desconectado");
                 System.out.println("IOException: " + e);
             }
             
@@ -190,14 +210,66 @@ public class Cliente extends javax.swing.JFrame {
             btnConectar.setText("CONECTAR");
             flag = false;
             
+            try 
+            {
+                
+                System.out.println("Status: Cliente Desconectado");
+                hostName = null; hostName = txtUser.getText();
+                String mensagem = "5#";
+                
+                conexao = new DatagramSocket();
+                byte[] m = mensagem.getBytes();
+                
+                InetAddress aHost = InetAddress.getByName(txtIP.getText());
+                int serverPort = Integer.parseInt(txtPorta.getText());
+                
+                DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
+                conexao.send(request);
+                
+            } catch (IOException e)
+            {  
+                System.out.println("IOException: " + e);
+            }
+            
             conexao.close();
-            System.out.println("Status: Cliente Desconectado");
         }
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
+
+    private void atualizarListaCliente(){
+        
+        System.out.println("atualizando clientes");
+        
+        Clientes c = Clientes.getInstancia();
+        ArrayList<String> temporario = new ArrayList<String> ();
+        
+        c.dtm = (DefaultTableModel) tbClientes.getModel();
+        c.dtm.setNumRows(0);
+        
+        temporario = c.getClientesName();
+        
+        for (int i = 0; i < temporario.size(); i++)
+            //c.dtm.addRow(new Object[] {c.getClientesAddress(), c.getClientesPort(), temporario});
+            System.out.println(temporario.get(i));
+        
+    }
+    
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        
+        atualizarListaCliente();
+        
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void imgAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAtualizarMouseClicked
+        // TODO add your handling code here:
+        
+        atualizarListaCliente();
+        
+    }//GEN-LAST:event_imgAtualizarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,6 +310,7 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane MensagemEnviar;
     private javax.swing.JToggleButton btnConectar;
     private javax.swing.JToggleButton btnEnviar;
+    private javax.swing.JLabel imgAtualizar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

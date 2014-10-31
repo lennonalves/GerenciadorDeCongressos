@@ -9,10 +9,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,12 +36,8 @@ public class Servidor extends javax.swing.JFrame {
     }
     
     boolean flag = false;
-    int cont = 1;
     
-    String clienteatual, hostId, hostName, hostAddress, hostPort;
-    
-    ArrayList<String> clientes = new ArrayList<String> ();
-    
+    private ArrayList<String> temporario = new ArrayList<String> ();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,15 +105,7 @@ public class Servidor extends javax.swing.JFrame {
             new String [] {
                 "IP", "Porta", "Nome"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tbClientes);
 
         getContentPane().add(jScrollPane1);
@@ -129,6 +116,11 @@ public class Servidor extends javax.swing.JFrame {
     
     private void btnLigarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLigarActionPerformed
         // TODO add your handling code here:
+        
+        Clientes c = Clientes.getInstancia();
+        
+        ArrayList<String> temporario = new ArrayList<String> ();
+        
         if(flag == false)
         {
             btnLigar.setText("DESLIGAR");
@@ -137,6 +129,7 @@ public class Servidor extends javax.swing.JFrame {
             System.out.println("Status: Servidor Ativo");
             
             try {
+                
                 DatagramSocket s = new DatagramSocket(Integer.parseInt(txtPorta.getText()));
 
                 while(true) {
@@ -146,23 +139,68 @@ public class Servidor extends javax.swing.JFrame {
                     s.receive(request);
 
                     String m = new String(request.getData());
-
                     InetAddress endereco = request.getAddress();
-
-                    hostId = null; hostName = null; hostAddress = null;
-
-                    hostId = m.substring(0, 2).trim();
-                    hostName = m.substring(2).trim();
-                    hostAddress = endereco.getHostAddress();
-                    hostPort = Integer.toString(request.getPort());
                     
+                    System.out.println("m: " + m);
+                    
+                    c.setHostId(null); c.setHostName(null); c.setHostAddress(null);
 
-                    System.out.println(hostAddress + hostPort + hostName);
-                    clienteatual = "#" + hostAddress + "#" + hostPort + "#" + hostName;
+                    c.setHostId(m.substring(0, 2).trim());
+                    c.setHostName(m.substring(2).trim());
+                    c.setHostAddress(endereco.getHostAddress());
+                    c.setHostPort(Integer.toString(request.getPort()));
                     
-                    clientes.add(clienteatual);
-                    atualizarListaCliente();
-                    
+                    switch (m.substring(0, 1)) {
+                        case "1":
+                            
+//                            System.out.println(hostAddress + " " + hostPort + " " + hostName);
+
+                            temporario = c.getClientesName();
+                            temporario.add(c.getHostName());
+                            c.setClientesName(temporario);
+                            
+                            temporario = c.getClientesAddress();
+                            temporario.add(c.getHostAddress());
+                            c.setClientesAddress(temporario);
+                            
+                            temporario = c.getClientesPort();
+                            temporario.add(c.getHostPort());
+                            c.setClientesPort(temporario);
+                            
+                            atualizarListaCliente();
+                            
+                            break;
+                            
+                        case "5":
+                                                       
+                            for (int i = 0; i < temporario.size(); i++) 
+                            { 
+                                if(temporario.equals(c.getHostName()))
+                                {
+                                    temporario = (ArrayList) c.getClientesName().clone();
+                                    temporario.remove(i);
+                                    c.setClientesName(temporario);
+                                    
+                                    temporario = c.getClientesAddress();
+                                    temporario.remove(i);
+                                    c.setClientesAddress(temporario);
+                                    
+                                    temporario = c.getClientesPort();
+                                    temporario.remove(i);
+                                    c.setClientesPort(temporario);
+                                }
+                            }
+                            
+                            atualizarListaCliente();
+                            
+                            break;
+                            
+                        default:
+                            
+                            System.out.println("Mensagem inválida\n");
+                            
+                            break;
+                    }
                 }
             }
             catch (IOException e) 
@@ -182,13 +220,18 @@ public class Servidor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void atualizarListaCliente(){        
-        System.out.print("2");
-        Iterator it = clientes.iterator();
-        while (it.hasNext()) 
-        { 
-            System.out.print(it.next());  
-        }
+    private void atualizarListaCliente(){   
+        
+        Clientes c = Clientes.getInstancia();
+        
+        c.dtm = (DefaultTableModel) tbClientes.getModel();
+        c.dtm.setNumRows(0);
+        
+        temporario = c.getClientesName();
+        
+        for (int i = 0; i < temporario.size(); i++)
+           // c.dtm.addRow(new Object[] {c.getClientesAddress(), c.getClientesPort(), temporario});
+        System.out.println(temporario.get(i));
         
     }
     
@@ -236,4 +279,20 @@ public class Servidor extends javax.swing.JFrame {
     private javax.swing.JTable tbClientes;
     private javax.swing.JTextField txtPorta;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTable getTbClientes() {
+        return tbClientes;
+    }
+
+    public void setTbClientes(javax.swing.JTable tbClientes) {
+        this.tbClientes = tbClientes;
+    }
+
+    public ArrayList<String> getTemporario() {
+        return temporario;
+    }
+
+    public void setTemporario(ArrayList<String> temporario) {
+        this.temporario = temporario;
+    }
 }
