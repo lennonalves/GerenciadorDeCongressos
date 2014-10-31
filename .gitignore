@@ -1,3 +1,10 @@
 Apoio/
 SistemasDistribuidos/
-TopicosAvancados/
+TopicosAvancados/build/
+TopicosAvancados/build.xml
+TopicosAvancados/dist/
+TopicosAvancados/manifest.mf
+TopicosAvancados/nbproject/
+TopicosAvancados/src/Exercicios/
+TopicosAvancados/src/ServidorDeEcoVersao1/
+TopicosAvancados/src/ServidorDeEcoVersao2/
