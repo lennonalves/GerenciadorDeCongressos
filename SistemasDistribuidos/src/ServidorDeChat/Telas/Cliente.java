@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServidorDeChat;
+package ServidorDeChat.Telas;
 
+import ServidorDeChat.RN.ClientesRN;
+import ServidorDeChat.VO.ClientesVO;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -179,6 +181,11 @@ public class Cliente extends javax.swing.JFrame {
         if(flag == false)
         {
             //conectado
+            
+            txtUser.setEnabled(flag);
+            txtIP.setEnabled(flag);
+            txtPorta.setEnabled(flag);
+            
             btnConectar.setText("DESCONECTAR");
             flag = true;
             
@@ -207,6 +214,11 @@ public class Cliente extends javax.swing.JFrame {
         else
         {
             //desconectado
+            
+            txtUser.setEnabled(flag);
+            txtIP.setEnabled(flag);
+            txtPorta.setEnabled(flag);
+            
             btnConectar.setText("CONECTAR");
             flag = false;
             
@@ -232,7 +244,9 @@ public class Cliente extends javax.swing.JFrame {
             }
             
             conexao.close();
+            
         }
+        
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -241,19 +255,12 @@ public class Cliente extends javax.swing.JFrame {
 
     private void atualizarListaCliente(){
         
-        System.out.println("atualizando clientes");
+        ClientesVO cvo = ClientesVO.getInstancia();
+        cvo.dtm = (DefaultTableModel) tbClientes.getModel();
+        cvo.dtm.setNumRows(0);
         
-        Clientes c = Clientes.getInstancia();
-        ArrayList<String> temporario = new ArrayList<String> ();
-        
-        c.dtm = (DefaultTableModel) tbClientes.getModel();
-        c.dtm.setNumRows(0);
-        
-        temporario = c.getClientesName();
-        
-        for (int i = 0; i < temporario.size(); i++)
-            //c.dtm.addRow(new Object[] {c.getClientesAddress(), c.getClientesPort(), temporario});
-            System.out.println(temporario.get(i));
+        ClientesRN crn = ClientesRN.getInstancia();
+        crn.atualizaClientes(cvo);
         
     }
     

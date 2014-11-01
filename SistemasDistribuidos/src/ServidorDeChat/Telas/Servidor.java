@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServidorDeChat;
+package ServidorDeChat.Telas;
 
+import ServidorDeChat.RN.ClientesRN;
+import ServidorDeChat.VO.ClientesVO;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,8 +36,6 @@ public class Servidor extends javax.swing.JFrame {
     }
     
     boolean flag = false;
-    
-    private ArrayList<String> temporario = new ArrayList<String> ();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,9 +115,10 @@ public class Servidor extends javax.swing.JFrame {
     private void btnLigarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLigarActionPerformed
         // TODO add your handling code here:
         
-        Clientes c = Clientes.getInstancia();
+        ClientesVO cvo = ClientesVO.getInstancia();
+        ClientesRN crn = ClientesRN.getInstancia();
         
-        ArrayList<String> temporario = new ArrayList<String> ();
+        crn.zerarClientes(cvo);
         
         if(flag == false)
         {
@@ -143,64 +142,31 @@ public class Servidor extends javax.swing.JFrame {
                     
                     System.out.println("m: " + m);
                     
-                    c.setHostId(null); c.setHostName(null); c.setHostAddress(null);
+                    cvo.setHostId(null); cvo.setHostName(null); cvo.setHostAddress(null);
 
-                    c.setHostId(m.substring(0, 2).trim());
-                    c.setHostName(m.substring(2).trim());
-                    c.setHostAddress(endereco.getHostAddress());
-                    c.setHostPort(Integer.toString(request.getPort()));
                     
-                    switch (m.substring(0, 1)) {
-                        case "1":
+                    
+                    if (m.substring(0, 1).equals("1")) 
+                    {
+                        
+                        cvo.setHostId(m.substring(0, 2).trim());
+                        cvo.setHostName(m.substring(2).trim());
+                        cvo.setHostAddress(endereco.getHostAddress());
+                        cvo.setHostPort(Integer.toString(request.getPort()));
+                        System.out.println(crn.adicionaCliente(cvo));
                             
-//                            System.out.println(hostAddress + " " + hostPort + " " + hostName);
-
-                            temporario = c.getClientesName();
-                            temporario.add(c.getHostName());
-                            c.setClientesName(temporario);
-                            
-                            temporario = c.getClientesAddress();
-                            temporario.add(c.getHostAddress());
-                            c.setClientesAddress(temporario);
-                            
-                            temporario = c.getClientesPort();
-                            temporario.add(c.getHostPort());
-                            c.setClientesPort(temporario);
-                            
-                            atualizarListaCliente();
-                            
-                            break;
-                            
-                        case "5":
-                                                       
-                            for (int i = 0; i < temporario.size(); i++) 
-                            { 
-                                if(temporario.equals(c.getHostName()))
-                                {
-                                    temporario = (ArrayList) c.getClientesName().clone();
-                                    temporario.remove(i);
-                                    c.setClientesName(temporario);
-                                    
-                                    temporario = c.getClientesAddress();
-                                    temporario.remove(i);
-                                    c.setClientesAddress(temporario);
-                                    
-                                    temporario = c.getClientesPort();
-                                    temporario.remove(i);
-                                    c.setClientesPort(temporario);
-                                }
-                            }
-                            
-                            atualizarListaCliente();
-                            
-                            break;
-                            
-                        default:
-                            
-                            System.out.println("Mensagem inválida\n");
-                            
-                            break;
                     }
+                    
+                    if (m.substring(0, 1).equals("5")) 
+                    { 
+                        
+                        cvo.setHostId(m.substring(0, 2).trim());
+                        cvo.setHostName(m.substring(2).trim());
+                        cvo.setHostAddress(endereco.getHostAddress());
+                        cvo.setHostPort(Integer.toString(request.getPort()));
+                        System.out.println(crn.removeCliente(cvo));
+                    }
+                    
                 }
             }
             catch (IOException e) 
@@ -222,16 +188,9 @@ public class Servidor extends javax.swing.JFrame {
 
     private void atualizarListaCliente(){   
         
-        Clientes c = Clientes.getInstancia();
-        
-        c.dtm = (DefaultTableModel) tbClientes.getModel();
-        c.dtm.setNumRows(0);
-        
-        temporario = c.getClientesName();
-        
-        for (int i = 0; i < temporario.size(); i++)
-           // c.dtm.addRow(new Object[] {c.getClientesAddress(), c.getClientesPort(), temporario});
-        System.out.println(temporario.get(i));
+        ClientesVO cvo = ClientesVO.getInstancia();
+        ClientesRN crn = ClientesRN.getInstancia();
+        crn.atualizaClientes(cvo);
         
     }
     
@@ -286,13 +245,5 @@ public class Servidor extends javax.swing.JFrame {
 
     public void setTbClientes(javax.swing.JTable tbClientes) {
         this.tbClientes = tbClientes;
-    }
-
-    public ArrayList<String> getTemporario() {
-        return temporario;
-    }
-
-    public void setTemporario(ArrayList<String> temporario) {
-        this.temporario = temporario;
     }
 }
