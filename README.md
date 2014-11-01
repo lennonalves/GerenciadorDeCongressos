@@ -8,8 +8,8 @@ Alunos: Lennon Alves e Victor Ambiel
 ---
 
 ## Disciplinas:
- * Tópicos Avançados em Ciência da Computação
  * Sistemas Distribuídos
+ * Tópicos Avançados em Ciência da Computação
  
 ----
 
