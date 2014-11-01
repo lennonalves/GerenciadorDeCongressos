@@ -45,7 +45,7 @@ public class ClientesPers {
             
             cx.desconectar();
             
-            mensagem = cvo.getHostName() + " entrou no chat";
+            mensagem = cvo.getHostId() + cvo.getHostName();
             
         } catch (SQLException e){
             
@@ -68,28 +68,7 @@ public class ClientesPers {
             query.executeUpdate("DELETE FROM CLIENTES WHERE CLI_IP = '" + cvo.getHostAddress()+ "'");
             cx.desconectar();
             
-            mensagem = cvo.getHostAddress()+ " saiu do chat";
-            
-        } catch (SQLException e){
-            
-                mensagem = "ERRO: " + e.getMessage();
-                
-        }
-        
-        return mensagem;
-    }
-    
-    public String zerarClientes (ClientesVO cvo) {
-        
-        Conexao cx = Conexao.getInstancia();
-        String mensagem = null;
-        
-        try {
-            System.out.println(cvo.getHostName());
-            Connection con = cx.conectar();
-            Statement query = con.createStatement();
-            query.executeUpdate("DELETE FROM CLIENTES WHERE CLI_IP IS NOT NULL");
-            cx.desconectar();
+            mensagem = cvo.getHostId();
             
         } catch (SQLException e){
             
@@ -127,4 +106,24 @@ public class ClientesPers {
         
         return mensagem;
     }
+    
+    public void zerarClientes (ClientesVO cvo) {
+        
+        Conexao cx = Conexao.getInstancia();
+        
+        try {
+            
+            System.out.println(cvo.getHostName());
+            Connection con = cx.conectar();
+            Statement query = con.createStatement();
+            query.executeUpdate("DELETE FROM CLIENTES WHERE CLI_IP IS NOT NULL");
+            cx.desconectar();
+            
+        } catch (SQLException e){
+            
+                System.out.println("ERRO: " + e.getMessage());
+                
+        }
+    }
+    
 }

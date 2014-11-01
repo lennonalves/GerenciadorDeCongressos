@@ -42,10 +42,9 @@ public class ClientesRN {
         return mensagem;
     }    
     
-    public String zerarClientes (ClientesVO cvo) {
+    public void zerarClientes (ClientesVO cvo) {
         ClientesPers cpers = ClientesPers.getInstancia();
-        String mensagem = cpers.zerarClientes(cvo);
-        return mensagem;
+        cpers.zerarClientes(cvo);
     }  
     
 }

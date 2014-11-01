@@ -140,11 +140,7 @@ public class Servidor extends javax.swing.JFrame {
                     String m = new String(request.getData());
                     InetAddress endereco = request.getAddress();
                     
-                    System.out.println("m: " + m);
-                    
                     cvo.setHostId(null); cvo.setHostName(null); cvo.setHostAddress(null);
-
-                    
                     
                     if (m.substring(0, 1).equals("1")) 
                     {
@@ -153,7 +149,7 @@ public class Servidor extends javax.swing.JFrame {
                         cvo.setHostName(m.substring(2).trim());
                         cvo.setHostAddress(endereco.getHostAddress());
                         cvo.setHostPort(Integer.toString(request.getPort()));
-                        System.out.println(crn.adicionaCliente(cvo));
+                        System.out.print(crn.adicionaCliente(cvo));
                             
                     }
                     
