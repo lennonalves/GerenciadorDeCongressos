@@ -7,11 +7,12 @@ package ServidorDeChat.Telas;
 
 import ServidorDeChat.RN.ClientesRN;
 import ServidorDeChat.VO.ClientesVO;
+import ServidorDeChat.VO.Connection;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -127,49 +128,9 @@ public class Servidor extends javax.swing.JFrame {
             
             System.out.println("Status: Servidor Ativo");
             
-            try {
-                
-                DatagramSocket s = new DatagramSocket(Integer.parseInt(txtPorta.getText()));
-
-                while(true) {
-                    
-                    byte[] buffer = new byte[256];
-                    DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-                    s.receive(request);
-
-                    String m = new String(request.getData());
-                    InetAddress endereco = request.getAddress();
-                    
-                    cvo.setHostId(null); cvo.setHostName(null); cvo.setHostAddress(null);
-                    
-                    if (m.substring(0, 1).equals("1")) 
-                    {
-                        
-                        cvo.setHostId(m.substring(0, 2).trim());
-                        cvo.setHostName(m.substring(2).trim());
-                        cvo.setHostAddress(endereco.getHostAddress());
-                        cvo.setHostPort(Integer.toString(request.getPort()));
-                        System.out.print(crn.adicionaCliente(cvo));
-                            
-                    }
-                    
-                    if (m.substring(0, 1).equals("5")) 
-                    { 
-                        
-                        cvo.setHostId(m.substring(0, 2).trim());
-                        cvo.setHostName(m.substring(2).trim());
-                        cvo.setHostAddress(endereco.getHostAddress());
-                        cvo.setHostPort(Integer.toString(request.getPort()));
-                        System.out.println(crn.removeCliente(cvo));
-                    }
-                    
-                }
-            }
-            catch (IOException e) 
-            {
-                System.out.println("Status: Servidor Desligado");
-                System.out.println("IOException: " + e);
-            }
+            cvo.setHostPort(txtPorta.getText());
+            Connection cx = new Connection();
+            cx.start();
         }
         else
         {
@@ -180,11 +141,17 @@ public class Servidor extends javax.swing.JFrame {
     
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
+        
+        atualizarListaCliente();
+        
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void atualizarListaCliente(){   
         
         ClientesVO cvo = ClientesVO.getInstancia();
+        cvo.dtm = (DefaultTableModel) tbClientes.getModel();
+        cvo.dtm.setNumRows(0);
+        
         ClientesRN crn = ClientesRN.getInstancia();
         crn.atualizaClientes(cvo);
         

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -224,7 +223,6 @@ public class Cliente extends javax.swing.JFrame {
             
             try 
             {
-                
                 System.out.println("Status: Cliente Desconectado");
                 hostName = null; hostName = txtUser.getText();
                 String mensagem = "5#";
