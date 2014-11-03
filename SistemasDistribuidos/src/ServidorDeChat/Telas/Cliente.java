@@ -40,7 +40,6 @@ public class Cliente extends javax.swing.JFrame {
 
         imgAtualizar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtIP = new javax.swing.JTextField();
         txtPorta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -53,6 +52,7 @@ public class Cliente extends javax.swing.JFrame {
         txtUser = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
+        imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(655, 320));
@@ -79,75 +79,78 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(imgAtualizar);
-        imgAtualizar.setBounds(600, 10, 40, 40);
+        imgAtualizar.setBounds(590, 10, 40, 40);
 
-        jLabel3.setFont(new java.awt.Font("PakType Naqsh", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("PakType Naqsh", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setText("Conexão do Cliente");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(230, 10, 210, 30);
-
-        jLabel4.setText("Conexão:");
-        jLabel4.setToolTipText("");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 70, 70, 16);
+        jLabel3.setBounds(180, 10, 300, 40);
 
         txtIP.setText("localhost");
         getContentPane().add(txtIP);
-        txtIP.setBounds(80, 60, 150, 28);
+        txtIP.setBounds(60, 60, 150, 28);
 
         txtPorta.setText("1970");
         getContentPane().add(txtPorta);
-        txtPorta.setBounds(290, 60, 90, 28);
+        txtPorta.setBounds(300, 60, 90, 28);
 
+        jLabel2.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("Porta:");
         jLabel2.setToolTipText("");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(240, 70, 50, 16);
+        jLabel2.setBounds(230, 60, 50, 26);
 
+        btnEnviar.setFont(new java.awt.Font("Zegoe Light - U", 0, 24)); // NOI18N
         btnEnviar.setText("ENVIAR");
+        btnEnviar.setToolTipText("Clique para enviar uma mensagem");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
             }
         });
         getContentPane().add(btnEnviar);
-        btnEnviar.setBounds(290, 170, 90, 80);
+        btnEnviar.setBounds(280, 190, 110, 70);
 
         txtMensagem.setColumns(20);
         txtMensagem.setRows(5);
         MensagemEnviar.setViewportView(txtMensagem);
 
         getContentPane().add(MensagemEnviar);
-        MensagemEnviar.setBounds(10, 170, 270, 82);
+        MensagemEnviar.setBounds(20, 190, 250, 70);
 
-        btnConectar.setText("CONECTAR");
-        btnConectar.setToolTipText("");
+        btnConectar.setFont(new java.awt.Font("Zegoe Light - U", 0, 24)); // NOI18N
+        btnConectar.setText("CONECTAR COM O SERVIDOR");
+        btnConectar.setToolTipText("Clique para iniciar a conexão com o servidor do chat");
         btnConectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConectarActionPerformed(evt);
             }
         });
         getContentPane().add(btnConectar);
-        btnConectar.setBounds(10, 130, 370, 28);
+        btnConectar.setBounds(20, 140, 370, 40);
 
-        jLabel5.setText("IP de");
+        jLabel5.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel5.setText("IP:");
         jLabel5.setToolTipText("");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(10, 60, 50, 16);
+        jLabel5.setBounds(20, 60, 30, 26);
 
+        jLabel6.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(254, 254, 254));
         jLabel6.setText("Usuário:");
         jLabel6.setToolTipText("");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(10, 100, 60, 16);
+        jLabel6.setBounds(20, 100, 80, 26);
         getContentPane().add(txtUser);
-        txtUser.setBounds(80, 90, 300, 28);
+        txtUser.setBounds(100, 100, 290, 28);
 
+        tbClientes.setFont(new java.awt.Font("Zegoe Light - U", 0, 15)); // NOI18N
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "IP", "Porta", "Nome"
@@ -164,7 +167,12 @@ public class Cliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbClientes);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(392, 60, 250, 190);
+        jScrollPane1.setBounds(400, 60, 230, 200);
+
+        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/dark-background.jpg"))); // NOI18N
+        imgBg.setText("jLabel1");
+        getContentPane().add(imgBg);
+        imgBg.setBounds(0, 0, 680, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -316,9 +324,9 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnConectar;
     private javax.swing.JToggleButton btnEnviar;
     private javax.swing.JLabel imgAtualizar;
+    private javax.swing.JLabel imgBg;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;

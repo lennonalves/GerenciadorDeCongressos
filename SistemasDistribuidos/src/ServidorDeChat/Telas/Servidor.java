@@ -8,10 +8,6 @@ package ServidorDeChat.Telas;
 import ServidorDeChat.RN.ClientesRN;
 import ServidorDeChat.VO.ClientesVO;
 import ServidorDeChat.VO.Connection;
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +33,8 @@ public class Servidor extends javax.swing.JFrame {
     }
     
     boolean flag = false;
-
+    ThreadGroup clientes = new ThreadGroup("clientes");
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,8 +51,10 @@ public class Servidor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
+        imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(400, 400));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -66,40 +65,48 @@ public class Servidor extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        jLabel2.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
         jLabel2.setText("Porta:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 80, 50, 16);
+        jLabel2.setBounds(20, 80, 50, 26);
 
-        btnLigar.setText("LIGAR");
+        btnLigar.setFont(new java.awt.Font("Zegoe Light - U", 0, 24)); // NOI18N
+        btnLigar.setText("LIGAR SERVIDOR");
+        btnLigar.setToolTipText("Clique para iniciar a conexão do servidor");
         btnLigar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLigarActionPerformed(evt);
             }
         });
         getContentPane().add(btnLigar);
-        btnLigar.setBounds(20, 110, 360, 40);
+        btnLigar.setBounds(170, 70, 210, 40);
 
+        jLabel3.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setText("Clientes conectados:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 160, 150, 16);
+        jLabel3.setBounds(20, 130, 170, 20);
 
+        txtPorta.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        txtPorta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPorta.setText("1970");
         txtPorta.setToolTipText("");
+        txtPorta.setBorder(null);
         txtPorta.setEnabled(false);
         getContentPane().add(txtPorta);
-        txtPorta.setBounds(70, 70, 310, 28);
+        txtPorta.setBounds(80, 70, 80, 40);
 
-        jLabel4.setFont(new java.awt.Font("PakType Naqsh", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("PakType Naqsh", 0, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
         jLabel4.setText("Conexão do Servidor");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(90, 20, 210, 30);
+        jLabel4.setBounds(50, 20, 330, 40);
 
+        tbClientes.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "IP", "Porta", "Nome"
@@ -108,7 +115,12 @@ public class Servidor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbClientes);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 190, 360, 140);
+        jScrollPane1.setBounds(20, 160, 360, 170);
+
+        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/dark-background.jpg"))); // NOI18N
+        imgBg.setText("jLabel1");
+        getContentPane().add(imgBg);
+        imgBg.setBounds(0, 0, 410, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,6 +148,8 @@ public class Servidor extends javax.swing.JFrame {
         {
             btnLigar.setText("LIGAR");
             flag = false;
+            
+            System.out.println("Status: Servidor Desligado");
         }
     }//GEN-LAST:event_btnLigarActionPerformed
     
@@ -194,6 +208,7 @@ public class Servidor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnLigar;
+    private javax.swing.JLabel imgBg;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
