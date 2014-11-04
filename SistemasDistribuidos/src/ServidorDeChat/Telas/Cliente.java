@@ -39,23 +39,22 @@ public class Cliente extends javax.swing.JFrame {
     private void initComponents() {
 
         imgAtualizar = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtIP = new javax.swing.JTextField();
         txtPorta = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        btnEnviar = new javax.swing.JToggleButton();
         MensagemEnviar = new javax.swing.JScrollPane();
         txtMensagem = new javax.swing.JTextArea();
-        btnConectar = new javax.swing.JToggleButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
+        lblEnviar = new javax.swing.JLabel();
+        lblConectar = new javax.swing.JLabel();
         imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(655, 320));
+        setTitle("Pandachat | Cliente");
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(400, 700));
+        setMinimumSize(new java.awt.Dimension(400, 740));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -79,73 +78,24 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(imgAtualizar);
-        imgAtualizar.setBounds(590, 10, 40, 40);
-
-        jLabel3.setFont(new java.awt.Font("PakType Naqsh", 0, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel3.setText("Conexão do Cliente");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(180, 10, 300, 40);
+        imgAtualizar.setBounds(350, 280, 40, 40);
 
         txtIP.setText("localhost");
         getContentPane().add(txtIP);
-        txtIP.setBounds(60, 60, 150, 28);
+        txtIP.setBounds(180, 190, 120, 28);
 
         txtPorta.setText("1970");
         getContentPane().add(txtPorta);
-        txtPorta.setBounds(300, 60, 90, 28);
-
-        jLabel2.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("Porta:");
-        jLabel2.setToolTipText("");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(230, 60, 50, 26);
-
-        btnEnviar.setFont(new java.awt.Font("Zegoe Light - U", 0, 24)); // NOI18N
-        btnEnviar.setText("ENVIAR");
-        btnEnviar.setToolTipText("Clique para enviar uma mensagem");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEnviar);
-        btnEnviar.setBounds(280, 190, 110, 70);
+        txtPorta.setBounds(320, 190, 60, 28);
 
         txtMensagem.setColumns(20);
         txtMensagem.setRows(5);
         MensagemEnviar.setViewportView(txtMensagem);
 
         getContentPane().add(MensagemEnviar);
-        MensagemEnviar.setBounds(20, 190, 250, 70);
-
-        btnConectar.setFont(new java.awt.Font("Zegoe Light - U", 0, 24)); // NOI18N
-        btnConectar.setText("CONECTAR COM O SERVIDOR");
-        btnConectar.setToolTipText("Clique para iniciar a conexão com o servidor do chat");
-        btnConectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConectarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnConectar);
-        btnConectar.setBounds(20, 140, 370, 40);
-
-        jLabel5.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel5.setText("IP:");
-        jLabel5.setToolTipText("");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(20, 60, 30, 26);
-
-        jLabel6.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel6.setText("Usuário:");
-        jLabel6.setToolTipText("");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 100, 80, 26);
+        MensagemEnviar.setBounds(20, 530, 360, 130);
         getContentPane().add(txtUser);
-        txtUser.setBounds(100, 100, 290, 28);
+        txtUser.setBounds(20, 190, 140, 28);
 
         tbClientes.setFont(new java.awt.Font("Zegoe Light - U", 0, 15)); // NOI18N
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -167,22 +117,66 @@ public class Cliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbClientes);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(400, 60, 230, 200);
+        jScrollPane1.setBounds(20, 330, 360, 110);
 
-        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/dark-background.jpg"))); // NOI18N
-        imgBg.setText("jLabel1");
+        lblEnviar.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        lblEnviar.setForeground(new java.awt.Color(254, 254, 254));
+        lblEnviar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEnviar.setText("Enviar");
+        getContentPane().add(lblEnviar);
+        lblEnviar.setBounds(300, 670, 80, 20);
+
+        lblConectar.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        lblConectar.setForeground(new java.awt.Color(254, 254, 254));
+        lblConectar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblConectar.setText("Conectar");
+        lblConectar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblConectarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblConectar);
+        lblConectar.setBounds(300, 239, 80, 20);
+
+        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/tela-cliente.jpg"))); // NOI18N
         getContentPane().add(imgBg);
-        imgBg.setBounds(0, 0, 680, 330);
+        imgBg.setBounds(0, 0, 490, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnviarActionPerformed
     
-    private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
+    private void atualizarListaCliente(){
+        
+        ClientesVO cvo = ClientesVO.getInstancia();
+        cvo.dtm = (DefaultTableModel) tbClientes.getModel();
+        cvo.dtm.setNumRows(0);
+        
+        ClientesRN crn = ClientesRN.getInstancia();
+        crn.atualizaClientes(cvo);
+        
+    }
+    
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        
+        atualizarListaCliente();
+        
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void imgAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAtualizarMouseClicked
+        // TODO add your handling code here:
+        
+        atualizarListaCliente();
+        
+    }//GEN-LAST:event_imgAtualizarMouseClicked
+
+    private void lblConectarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConectarMouseClicked
+        // TODO add your handling code here:
+        
         DatagramSocket conexao = null;
         
         if(flag == false)
@@ -193,7 +187,7 @@ public class Cliente extends javax.swing.JFrame {
             txtIP.setEnabled(flag);
             txtPorta.setEnabled(flag);
             
-            btnConectar.setText("DESCONECTAR");
+            lblConectar.setText("Desconectar");
             flag = true;
             
             try 
@@ -226,7 +220,7 @@ public class Cliente extends javax.swing.JFrame {
             txtIP.setEnabled(flag);
             txtPorta.setEnabled(flag);
             
-            btnConectar.setText("CONECTAR");
+            lblConectar.setText("Conectar");
             flag = false;
             
             try 
@@ -253,36 +247,7 @@ public class Cliente extends javax.swing.JFrame {
             
         }
         
-    }//GEN-LAST:event_btnConectarActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
-
-    private void atualizarListaCliente(){
-        
-        ClientesVO cvo = ClientesVO.getInstancia();
-        cvo.dtm = (DefaultTableModel) tbClientes.getModel();
-        cvo.dtm.setNumRows(0);
-        
-        ClientesRN crn = ClientesRN.getInstancia();
-        crn.atualizaClientes(cvo);
-        
-    }
-    
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        // TODO add your handling code here:
-        
-        atualizarListaCliente();
-        
-    }//GEN-LAST:event_formWindowGainedFocus
-
-    private void imgAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAtualizarMouseClicked
-        // TODO add your handling code here:
-        
-        atualizarListaCliente();
-        
-    }//GEN-LAST:event_imgAtualizarMouseClicked
+    }//GEN-LAST:event_lblConectarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -321,15 +286,11 @@ public class Cliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane MensagemEnviar;
-    private javax.swing.JToggleButton btnConectar;
-    private javax.swing.JToggleButton btnEnviar;
     private javax.swing.JLabel imgAtualizar;
     private javax.swing.JLabel imgBg;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblConectar;
+    private javax.swing.JLabel lblEnviar;
     private javax.swing.JTable tbClientes;
     private javax.swing.JTextField txtIP;
     private javax.swing.JTextArea txtMensagem;

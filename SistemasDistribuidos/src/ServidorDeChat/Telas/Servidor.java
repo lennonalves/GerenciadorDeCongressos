@@ -44,18 +44,17 @@ public class Servidor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        btnLigar = new javax.swing.JToggleButton();
-        jLabel3 = new javax.swing.JLabel();
+        imgServidor = new javax.swing.JLabel();
         txtPorta = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
         imgBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pandachat | Servidor");
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(400, 400));
+        setMaximumSize(new java.awt.Dimension(600, 440));
+        setMinimumSize(new java.awt.Dimension(600, 440));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -65,43 +64,23 @@ public class Servidor extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("Porta:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 80, 50, 26);
-
-        btnLigar.setFont(new java.awt.Font("Zegoe Light - U", 0, 24)); // NOI18N
-        btnLigar.setText("LIGAR SERVIDOR");
-        btnLigar.setToolTipText("Clique para iniciar a conexão do servidor");
-        btnLigar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLigarActionPerformed(evt);
+        imgServidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/btn-desligado.png"))); // NOI18N
+        imgServidor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgServidorMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLigar);
-        btnLigar.setBounds(170, 70, 210, 40);
+        getContentPane().add(imgServidor);
+        imgServidor.setBounds(90, 200, 180, 170);
 
-        jLabel3.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel3.setText("Clientes conectados:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 130, 170, 20);
-
+        txtPorta.setBackground(java.awt.Color.white);
         txtPorta.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
         txtPorta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPorta.setText("1970");
         txtPorta.setToolTipText("");
-        txtPorta.setBorder(null);
-        txtPorta.setEnabled(false);
+        txtPorta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         getContentPane().add(txtPorta);
-        txtPorta.setBounds(80, 70, 80, 40);
-
-        jLabel4.setFont(new java.awt.Font("PakType Naqsh", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel4.setText("Conexão do Servidor");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(50, 20, 330, 40);
+        txtPorta.setBounds(80, 160, 180, 20);
 
         tbClientes.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,17 +94,23 @@ public class Servidor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbClientes);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 160, 360, 170);
+        jScrollPane1.setBounds(350, 100, 250, 310);
 
-        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/dark-background.jpg"))); // NOI18N
-        imgBg.setText("jLabel1");
+        imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/tela-servidor.jpg"))); // NOI18N
         getContentPane().add(imgBg);
-        imgBg.setBounds(0, 0, 410, 360);
+        imgBg.setBounds(0, 0, 710, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void btnLigarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLigarActionPerformed
+        
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        
+        atualizarListaCliente();
+        
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void imgServidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgServidorMouseClicked
         // TODO add your handling code here:
         
         ClientesVO cvo = ClientesVO.getInstancia();
@@ -135,7 +120,8 @@ public class Servidor extends javax.swing.JFrame {
         
         if(flag == false)
         {
-            btnLigar.setText("DESLIGAR");
+            //btnLigar.setText("DESLIGAR");
+            imgServidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/btn-ligado.png")));
             flag = true;
             
             System.out.println("Status: Servidor Ativo");
@@ -146,19 +132,14 @@ public class Servidor extends javax.swing.JFrame {
         }
         else
         {
-            btnLigar.setText("LIGAR");
+            //btnLigar.setText("LIGAR");
+            imgServidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/btn-desligado.png")));
             flag = false;
             
             System.out.println("Status: Servidor Desligado");
         }
-    }//GEN-LAST:event_btnLigarActionPerformed
-    
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        // TODO add your handling code here:
         
-        atualizarListaCliente();
-        
-    }//GEN-LAST:event_formWindowGainedFocus
+    }//GEN-LAST:event_imgServidorMouseClicked
 
     private void atualizarListaCliente(){   
         
@@ -207,11 +188,8 @@ public class Servidor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnLigar;
     private javax.swing.JLabel imgBg;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel imgServidor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbClientes;
     private javax.swing.JTextField txtPorta;
