@@ -23,7 +23,7 @@ public class ClientesVO {
         return instancia;
     }
     
-    private String clienteatual, hostId, hostName, hostAddress, hostPort;
+    private String clienteatual, hostId, hostName, hostAddress, hostPort, mensagem;
     
     public DefaultTableModel dtm = new DefaultTableModel();
 
@@ -73,6 +73,14 @@ public class ClientesVO {
 
     public void setDtm(DefaultTableModel dtm) {
         this.dtm = dtm;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
     
 }

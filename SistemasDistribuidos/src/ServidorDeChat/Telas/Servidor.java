@@ -52,7 +52,6 @@ public class Servidor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pandachat | Servidor");
-        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(600, 440));
         setMinimumSize(new java.awt.Dimension(600, 440));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {

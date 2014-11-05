@@ -126,4 +126,33 @@ public class ClientesPers {
         }
     }
     
+    public String listarClientes (ClientesVO cvo) {
+        
+        Conexao cx = Conexao.getInstancia();
+        String mensagem = null;
+        mensagem = "2";
+        
+        try {
+            
+            Connection con = cx.conectar();
+            Statement consulta = con.createStatement();
+            ResultSet resultado = consulta.executeQuery("SELECT * FROM CLIENTES");
+            
+            while (resultado.next()){
+                
+                mensagem = mensagem + "#" + resultado.getString("CLI_IP") + "#" + resultado.getString("CLI_PORTA") + "#" + resultado.getString("CLI_NOME");
+            
+            }
+            
+            cx.desconectar();
+            
+        } catch (SQLException e){
+            
+            mensagem = "ERRO: " + e.getMessage();
+                
+        }
+        
+        return mensagem;
+    }
+    
 }

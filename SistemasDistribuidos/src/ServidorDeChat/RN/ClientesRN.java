@@ -47,4 +47,10 @@ public class ClientesRN {
         cpers.zerarClientes(cvo);
     }  
     
+    public String listarClientes (ClientesVO cvo) {
+        ClientesPers cpers = ClientesPers.getInstancia();
+        String mensagem = cpers.listarClientes(cvo);
+        return mensagem;
+    }
+    
 }

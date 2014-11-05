@@ -41,6 +41,8 @@ public class Cliente extends javax.swing.JFrame {
         imgAtualizar = new javax.swing.JLabel();
         txtIP = new javax.swing.JTextField();
         txtPorta = new javax.swing.JTextField();
+        MensagemEnviar1 = new javax.swing.JScrollPane();
+        txtChat = new javax.swing.JTextArea();
         MensagemEnviar = new javax.swing.JScrollPane();
         txtMensagem = new javax.swing.JTextArea();
         txtUser = new javax.swing.JTextField();
@@ -53,8 +55,8 @@ public class Cliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pandachat | Cliente");
         setAlwaysOnTop(true);
-        setMaximumSize(new java.awt.Dimension(400, 700));
-        setMinimumSize(new java.awt.Dimension(400, 740));
+        setMaximumSize(new java.awt.Dimension(787, 590));
+        setMinimumSize(new java.awt.Dimension(787, 590));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -78,24 +80,31 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(imgAtualizar);
-        imgAtualizar.setBounds(350, 280, 40, 40);
+        imgAtualizar.setBounds(330, 240, 40, 50);
 
         txtIP.setText("localhost");
         getContentPane().add(txtIP);
-        txtIP.setBounds(180, 190, 120, 28);
+        txtIP.setBounds(170, 160, 120, 28);
 
         txtPorta.setText("1970");
         getContentPane().add(txtPorta);
-        txtPorta.setBounds(320, 190, 60, 28);
+        txtPorta.setBounds(310, 160, 60, 28);
+
+        txtChat.setColumns(20);
+        txtChat.setRows(5);
+        MensagemEnviar1.setViewportView(txtChat);
+
+        getContentPane().add(MensagemEnviar1);
+        MensagemEnviar1.setBounds(430, 140, 320, 180);
 
         txtMensagem.setColumns(20);
         txtMensagem.setRows(5);
         MensagemEnviar.setViewportView(txtMensagem);
 
         getContentPane().add(MensagemEnviar);
-        MensagemEnviar.setBounds(20, 530, 360, 130);
+        MensagemEnviar.setBounds(430, 410, 320, 90);
         getContentPane().add(txtUser);
-        txtUser.setBounds(20, 190, 140, 28);
+        txtUser.setBounds(10, 160, 140, 28);
 
         tbClientes.setFont(new java.awt.Font("Zegoe Light - U", 0, 15)); // NOI18N
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -117,16 +126,21 @@ public class Cliente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbClientes);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 330, 360, 110);
+        jScrollPane1.setBounds(20, 290, 350, 230);
 
-        lblEnviar.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        lblEnviar.setFont(new java.awt.Font("Zegoe Light - U", 0, 14)); // NOI18N
         lblEnviar.setForeground(new java.awt.Color(254, 254, 254));
         lblEnviar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEnviar.setText("Enviar");
+        lblEnviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEnviarMouseClicked(evt);
+            }
+        });
         getContentPane().add(lblEnviar);
-        lblEnviar.setBounds(300, 670, 80, 20);
+        lblEnviar.setBounds(680, 500, 90, 30);
 
-        lblConectar.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        lblConectar.setFont(new java.awt.Font("Zegoe Light - U", 0, 14)); // NOI18N
         lblConectar.setForeground(new java.awt.Color(254, 254, 254));
         lblConectar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblConectar.setText("Conectar");
@@ -136,11 +150,11 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(lblConectar);
-        lblConectar.setBounds(300, 239, 80, 20);
+        lblConectar.setBounds(280, 200, 110, 30);
 
         imgBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/tela-cliente.jpg"))); // NOI18N
         getContentPane().add(imgBg);
-        imgBg.setBounds(0, 0, 490, 700);
+        imgBg.setBounds(0, 0, 820, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,6 +208,7 @@ public class Cliente extends javax.swing.JFrame {
             {
                 
                 System.out.println("Status: Cliente Conectado");
+                
                 hostName = null; hostName = txtUser.getText();
                 String mensagem = "1#" + hostName;
                 
@@ -226,6 +241,7 @@ public class Cliente extends javax.swing.JFrame {
             try 
             {
                 System.out.println("Status: Cliente Desconectado");
+                
                 hostName = null; hostName = txtUser.getText();
                 String mensagem = "5#";
                 
@@ -248,6 +264,39 @@ public class Cliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_lblConectarMouseClicked
+
+    private void lblEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnviarMouseClicked
+        // TODO add your handling code here:
+        
+        ClientesVO cvo = ClientesVO.getInstancia();
+        
+        String ipDestino = null, portaDestino = null, conversa = null; int linha = 0;
+        DatagramSocket conexao = null;
+        
+        try 
+            {
+                linha = tbClientes.getSelectedRow();
+                ipDestino = (String) cvo.dtm.getValueAt(linha, 0);
+                portaDestino = (String) cvo.dtm.getValueAt(linha, 1);
+                conversa = txtMensagem.getText();
+                String mensagem = "3#" + ipDestino + "#" + portaDestino + "#" + conversa;
+                System.out.println(mensagem);
+                
+                conexao = new DatagramSocket();
+                byte[] m = mensagem.getBytes();
+                
+                InetAddress aHost = InetAddress.getByName(txtIP.getText());
+                int serverPort = Integer.parseInt(txtPorta.getText());
+                
+                DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
+                conexao.send(request);
+                
+            } catch (IOException e)
+            {  
+                System.out.println("IOException: " + e);
+            }
+        
+    }//GEN-LAST:event_lblEnviarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -286,12 +335,14 @@ public class Cliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane MensagemEnviar;
+    private javax.swing.JScrollPane MensagemEnviar1;
     private javax.swing.JLabel imgAtualizar;
     private javax.swing.JLabel imgBg;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblConectar;
     private javax.swing.JLabel lblEnviar;
     private javax.swing.JTable tbClientes;
+    private javax.swing.JTextArea txtChat;
     private javax.swing.JTextField txtIP;
     private javax.swing.JTextArea txtMensagem;
     private javax.swing.JTextField txtPorta;
