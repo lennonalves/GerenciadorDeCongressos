@@ -7,6 +7,8 @@ package ServidorDeChat.RN;
 
 import ServidorDeChat.Pers.ClientesPers;
 import ServidorDeChat.VO.ClientesVO;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 /**
  *
@@ -50,6 +52,18 @@ public class ClientesRN {
     public String listarClientes (ClientesVO cvo) {
         ClientesPers cpers = ClientesPers.getInstancia();
         String mensagem = cpers.listarClientes(cvo);
+        return mensagem;
+    }
+    
+    public String clienteGeral (ClientesVO cvo) {
+        ClientesPers cpers = ClientesPers.getInstancia();
+        String mensagem = cpers.clienteGeral(cvo);
+        return mensagem;
+    }
+    
+    public String broadcast (ClientesVO cvo) throws UnknownHostException, IOException {
+        ClientesPers cpers = ClientesPers.getInstancia();
+        String mensagem = cpers.broadcast(cvo);
         return mensagem;
     }
     

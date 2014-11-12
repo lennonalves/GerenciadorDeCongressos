@@ -38,7 +38,7 @@ public class ConnectionCliente extends Thread {
                 Logger.getLogger(ConnectionCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
 //            System.out.println("fora");
-            String m = new String(request.getData());        
+            String m = new String(request.getData()); 
             System.out.println(m);
         }
     }

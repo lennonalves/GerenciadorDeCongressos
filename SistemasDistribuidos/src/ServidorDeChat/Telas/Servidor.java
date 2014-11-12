@@ -54,11 +54,18 @@ public class Servidor extends javax.swing.JFrame {
         setTitle("Pandachat | Servidor");
         setMaximumSize(new java.awt.Dimension(600, 440));
         setMinimumSize(new java.awt.Dimension(600, 440));
+        setName("janelaServidor"); // NOI18N
+        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
             }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
         getContentPane().setLayout(null);
@@ -104,9 +111,7 @@ public class Servidor extends javax.swing.JFrame {
         
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        
         atualizarListaCliente();
-        
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void imgServidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgServidorMouseClicked
@@ -116,6 +121,7 @@ public class Servidor extends javax.swing.JFrame {
         ClientesRN crn = ClientesRN.getInstancia();
         
         crn.zerarClientes(cvo);
+        crn.clienteGeral(cvo);
         
         if(flag == false)
         {
@@ -139,6 +145,11 @@ public class Servidor extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_imgServidorMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        atualizarListaCliente();
+    }//GEN-LAST:event_formWindowActivated
 
     private void atualizarListaCliente(){   
         

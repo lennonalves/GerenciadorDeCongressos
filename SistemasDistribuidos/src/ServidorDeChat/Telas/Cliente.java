@@ -58,6 +58,8 @@ public class Cliente extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(787, 590));
         setMinimumSize(new java.awt.Dimension(787, 590));
+        setName("janelaCliente"); // NOI18N
+        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -162,6 +164,7 @@ public class Cliente extends javax.swing.JFrame {
     
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
+        atualizarListaCliente();
     }//GEN-LAST:event_formWindowActivated
 
     private void atualizarListaCliente(){
