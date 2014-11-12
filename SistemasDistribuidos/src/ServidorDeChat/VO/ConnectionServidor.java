@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @author lennonalves
  */
 
-public class Connection extends Thread {
+public class ConnectionServidor extends Thread {
     
     @Override
     public void run()
@@ -31,7 +31,7 @@ public class Connection extends Thread {
         try {
             s = new DatagramSocket(Integer.parseInt(cvo.getHostPort()));
         } catch (SocketException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         while(true) {
@@ -41,7 +41,7 @@ public class Connection extends Thread {
             try {
                 s.receive(request);
             } catch (IOException ex) {
-                Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ConnectionServidor.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             String m = new String(request.getData());
@@ -71,12 +71,15 @@ public class Connection extends Thread {
             
             if (m.substring(0, 1).equals("3")) 
             { //ip //porta //mensagem
-                int aux = 0;
+                int auxIni, auxFim;
                 cvo.setHostId(m.substring(0, 2).trim());
                 cvo.setHostAddress(endereco.getHostAddress());
-                cvo.setHostPort(Integer.toString(request.getPort()));
-                aux = m.lastIndexOf('#')+1;
-                cvo.setMensagem(m.substring(aux));
+                auxIni = m.indexOf('#', 2);
+                auxFim = m.lastIndexOf('#');
+                cvo.setHostPort(m.substring(auxIni+1, auxFim));
+                cvo.setMensagem(m.substring(auxFim+1));
+                
+                System.out.println(m);
                 
                 if(cvo.getHostPort().equals("99999") && cvo.getHostAddress().equals("999.999.999.999"))
                 {
@@ -84,7 +87,26 @@ public class Connection extends Thread {
                 }
                 else
                 {
-//                    enviar mensagem para o cliente (datagrama 4)
+                    DatagramSocket conexao = null;
+
+                    try 
+                    { //ipcliente //portacliente //mensagem
+                        
+                        String mensagem = "4#" + cvo.getHostAddress() + "#" + cvo.getHostPort() + "#" + cvo.getMensagem();
+
+                        conexao = new DatagramSocket();
+                        byte[] mc = mensagem.getBytes();
+
+                        InetAddress aHost = InetAddress.getByName(cvo.getHostAddress());
+                        int serverPort = Integer.parseInt(cvo.getHostPort());
+
+                        request = new DatagramPacket(mc, mc.length, aHost, serverPort);
+                        conexao.send(request);
+
+                    } catch (IOException e)
+                    {  
+                        System.out.println("IOException: " + e);
+                    }
                 }
             }
         }

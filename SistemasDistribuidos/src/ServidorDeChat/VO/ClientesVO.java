@@ -23,7 +23,8 @@ public class ClientesVO {
         return instancia;
     }
     
-    private String clienteatual, hostId, hostName, hostAddress, hostPort, mensagem;
+    private String clienteatual, hostId, hostName, hostAddress, hostPort, mensagem,
+            ipDestino, portaDestino, conversa;
     
     public DefaultTableModel dtm = new DefaultTableModel();
 
@@ -81,6 +82,30 @@ public class ClientesVO {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public String getIpDestino() {
+        return ipDestino;
+    }
+
+    public void setIpDestino(String ipDestino) {
+        this.ipDestino = ipDestino;
+    }
+
+    public String getPortaDestino() {
+        return portaDestino;
+    }
+
+    public void setPortaDestino(String portaDestino) {
+        this.portaDestino = portaDestino;
+    }
+
+    public String getConversa() {
+        return conversa;
+    }
+
+    public void setConversa(String conversa) {
+        this.conversa = conversa;
     }
     
 }

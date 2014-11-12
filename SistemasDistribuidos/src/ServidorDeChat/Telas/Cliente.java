@@ -7,6 +7,7 @@ package ServidorDeChat.Telas;
 
 import ServidorDeChat.RN.ClientesRN;
 import ServidorDeChat.VO.ClientesVO;
+import ServidorDeChat.VO.ConnectionCliente;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -221,6 +222,12 @@ public class Cliente extends javax.swing.JFrame {
                 DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
                 conexao.send(request);
                 
+                //datagrama 4
+                ClientesVO cvo = ClientesVO.getInstancia();
+                cvo.setHostPort(Integer.toString(conexao.getLocalPort()));
+                ConnectionCliente cc = new ConnectionCliente(conexao);
+                cc.start();
+                
             } catch (IOException e)
             {  
                 System.out.println("IOException: " + e);
@@ -241,19 +248,19 @@ public class Cliente extends javax.swing.JFrame {
             try 
             {
                 System.out.println("Status: Cliente Desconectado");
-                
+            
                 hostName = null; hostName = txtUser.getText();
                 String mensagem = "5#";
-                
+            
                 conexao = new DatagramSocket();
                 byte[] m = mensagem.getBytes();
-                
+            
                 InetAddress aHost = InetAddress.getByName(txtIP.getText());
                 int serverPort = Integer.parseInt(txtPorta.getText());
-                
+            
                 DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
                 conexao.send(request);
-                
+            
             } catch (IOException e)
             {  
                 System.out.println("IOException: " + e);
@@ -270,31 +277,31 @@ public class Cliente extends javax.swing.JFrame {
         
         ClientesVO cvo = ClientesVO.getInstancia();
         
-        String ipDestino = null, portaDestino = null, conversa = null; int linha = 0;
-        DatagramSocket conexao = null;
+        int linha = 0; DatagramSocket conexao = null;
         
         try 
-            {
-                linha = tbClientes.getSelectedRow();
-                ipDestino = (String) cvo.dtm.getValueAt(linha, 0);
-                portaDestino = (String) cvo.dtm.getValueAt(linha, 1);
-                conversa = txtMensagem.getText();
-                String mensagem = "3#" + ipDestino + "#" + portaDestino + "#" + conversa;
-                System.out.println(mensagem);
+        {
+            linha = tbClientes.getSelectedRow();
+            cvo.setIpDestino((String) cvo.dtm.getValueAt(linha, 0));
+            cvo.setPortaDestino((String) cvo.dtm.getValueAt(linha, 1));
+            cvo.setConversa(txtMensagem.getText());
+            
+            String mensagem = "3#" + cvo.getIpDestino() + "#" + cvo.getPortaDestino() + "#" + cvo.getConversa();
+//            System.out.println(mensagem);
+
+            conexao = new DatagramSocket();
+            byte[] m = mensagem.getBytes();
+
+            InetAddress aHost = InetAddress.getByName(txtIP.getText());
+            int serverPort = Integer.parseInt(txtPorta.getText());
+
+            DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
+            conexao.send(request);
                 
-                conexao = new DatagramSocket();
-                byte[] m = mensagem.getBytes();
-                
-                InetAddress aHost = InetAddress.getByName(txtIP.getText());
-                int serverPort = Integer.parseInt(txtPorta.getText());
-                
-                DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
-                conexao.send(request);
-                
-            } catch (IOException e)
-            {  
-                System.out.println("IOException: " + e);
-            }
+        } catch (IOException e)
+        {  
+            System.out.println("IOException: " + e);
+        }
         
     }//GEN-LAST:event_lblEnviarMouseClicked
 

@@ -7,7 +7,7 @@ package ServidorDeChat.Telas;
 
 import ServidorDeChat.RN.ClientesRN;
 import ServidorDeChat.VO.ClientesVO;
-import ServidorDeChat.VO.Connection;
+import ServidorDeChat.VO.ConnectionServidor;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -126,8 +126,8 @@ public class Servidor extends javax.swing.JFrame {
             System.out.println("Status: Servidor Ativo");
             
             cvo.setHostPort(txtPorta.getText());
-            Connection cx = new Connection();
-            cx.start();
+            ConnectionServidor cs = new ConnectionServidor();
+            cs.start();
         }
         else
         {
