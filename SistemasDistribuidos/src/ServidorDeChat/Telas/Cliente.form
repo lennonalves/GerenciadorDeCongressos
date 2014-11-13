@@ -86,7 +86,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="430" y="140" width="320" height="180"/>
+          <AbsoluteConstraints x="430" y="140" width="330" height="180"/>
         </Constraint>
       </Constraints>
 
@@ -96,6 +96,8 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="BEM VINDO AO PANDA CHAT!&#xa;&#xa;Conecte-se com seu nome de usu&#xe1;rio e mande &#xa;mensagens aos seus amigos atrav&#xe9;s de nossos &#xa;protocolos.&#xa;&#xa;Basta selecionar o usu&#xe1;rio na lista de clientes &#xa;conectados, digitar a mensagem e clicar em &#xa;enviar! Em instantes seu amigo ir&#xe1; receber a &#xa;mensagem.. :)"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

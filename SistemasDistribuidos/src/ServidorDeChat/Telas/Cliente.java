@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -95,10 +96,12 @@ public class Cliente extends javax.swing.JFrame {
 
         txtChat.setColumns(20);
         txtChat.setRows(5);
+        txtChat.setText("BEM VINDO AO PANDA CHAT!\n\nConecte-se com seu nome de usuário e mande \nmensagens aos seus amigos através de nossos \nprotocolos.\n\nBasta selecionar o usuário na lista de clientes \nconectados, digitar a mensagem e clicar em \nenviar! Em instantes seu amigo irá receber a \nmensagem.. :)");
+        txtChat.setEnabled(false);
         MensagemEnviar1.setViewportView(txtChat);
 
         getContentPane().add(MensagemEnviar1);
-        MensagemEnviar1.setBounds(430, 140, 320, 180);
+        MensagemEnviar1.setBounds(430, 140, 330, 180);
 
         txtMensagem.setColumns(20);
         txtMensagem.setRows(5);
@@ -195,84 +198,88 @@ public class Cliente extends javax.swing.JFrame {
     private void lblConectarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConectarMouseClicked
         // TODO add your handling code here:
         
-        DatagramSocket conexao = null;
-        
-        if(flag == false)
+        if (!(txtUser.getText().equals("")||txtIP.getText().equals("")||txtPorta.getText().equals("")))
         {
-            //conectado
-            
-            txtUser.setEnabled(flag);
-            txtIP.setEnabled(flag);
-            txtPorta.setEnabled(flag);
-            
-            lblConectar.setText("Desconectar");
-            flag = true;
-            
-            try 
+            DatagramSocket conexao = null;
+
+            if(flag == false)
             {
-                
-                System.out.println("Status: Cliente Conectado");
-                
-                hostName = null; hostName = txtUser.getText();
-                String mensagem = "1#" + hostName;
-                
-                conexao = new DatagramSocket();
-                byte[] m = mensagem.getBytes();
-                
-                InetAddress aHost = InetAddress.getByName(txtIP.getText());
-                int serverPort = Integer.parseInt(txtPorta.getText());
-                
-                DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
-                conexao.send(request);
-                
-                //datagrama 4
-                ClientesVO cvo = ClientesVO.getInstancia();
-                cvo.setHostPort(Integer.toString(conexao.getLocalPort()));
-                ConnectionCliente cc = new ConnectionCliente(conexao);
-                cc.start();
-                
-            } catch (IOException e)
-            {  
-                System.out.println("IOException: " + e);
+                //conectado
+
+                txtUser.setEnabled(flag);
+                txtIP.setEnabled(flag);
+                txtPorta.setEnabled(flag);
+
+                lblConectar.setText("Desconectar");
+                flag = true;
+
+                try 
+                {
+
+                    System.out.println("Status: Cliente Conectado");
+
+                    hostName = null; hostName = txtUser.getText();
+                    String mensagem = "1#" + hostName;
+
+                    conexao = new DatagramSocket();
+                    byte[] m = mensagem.getBytes();
+
+                    InetAddress aHost = InetAddress.getByName(txtIP.getText());
+                    int serverPort = Integer.parseInt(txtPorta.getText());
+
+                    DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
+                    conexao.send(request);
+
+                    //datagrama 4
+                    ClientesVO cvo = ClientesVO.getInstancia();
+                    cvo.setHostPort(Integer.toString(conexao.getLocalPort()));
+                    ConnectionCliente cc = new ConnectionCliente(conexao);
+                    cc.start();
+
+                } catch (IOException e)
+                {  
+                    System.out.println("IOException: " + e);
+                }
+
             }
-            
+            else
+            {
+                //desconectado
+
+                txtUser.setEnabled(flag);
+                txtIP.setEnabled(flag);
+                txtPorta.setEnabled(flag);
+
+                lblConectar.setText("Conectar");
+                flag = false;
+
+                try 
+                {
+                    System.out.println("Status: Cliente Desconectado");
+
+                    hostName = null; hostName = txtUser.getText();
+                    String mensagem = "5#";
+
+                    conexao = new DatagramSocket();
+                    byte[] m = mensagem.getBytes();
+
+                    InetAddress aHost = InetAddress.getByName(txtIP.getText());
+                    int serverPort = Integer.parseInt(txtPorta.getText());
+
+                    DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
+                    conexao.send(request);
+
+                } catch (IOException e)
+                {  
+                    System.out.println("IOException: " + e);
+                }
+
+                conexao.close();
+
+            }
         }
         else
-        {
-            //desconectado
-            
-            txtUser.setEnabled(flag);
-            txtIP.setEnabled(flag);
-            txtPorta.setEnabled(flag);
-            
-            lblConectar.setText("Conectar");
-            flag = false;
-            
-            try 
-            {
-                System.out.println("Status: Cliente Desconectado");
-            
-                hostName = null; hostName = txtUser.getText();
-                String mensagem = "5#";
-            
-                conexao = new DatagramSocket();
-                byte[] m = mensagem.getBytes();
-            
-                InetAddress aHost = InetAddress.getByName(txtIP.getText());
-                int serverPort = Integer.parseInt(txtPorta.getText());
-            
-                DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
-                conexao.send(request);
-            
-            } catch (IOException e)
-            {  
-                System.out.println("IOException: " + e);
-            }
-            
-            conexao.close();
-            
-        }
-        
+            JOptionPane.showMessageDialog(null, "Favor inserir os dados corretamente");
     }//GEN-LAST:event_lblConectarMouseClicked
 
     private void lblEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnviarMouseClicked

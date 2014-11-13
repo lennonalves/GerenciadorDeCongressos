@@ -57,6 +57,7 @@ public class ConnectionServidor extends Thread {
                 cvo.setHostPort(Integer.toString(request.getPort()));
                 System.out.print(crn.adicionaCliente(cvo));
                 System.out.println("\n" + crn.listarClientes(cvo));
+                
             }
 
             if (m.substring(0, 1).equals("5")) 
