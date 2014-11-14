@@ -52,7 +52,8 @@ public class ClientesRN {
     public String listarClientes (ClientesVO cvo) {
         ClientesPers cpers = ClientesPers.getInstancia();
         String mensagem = cpers.listarClientes(cvo);
-        return mensagem;
+        if(!mensagem.equals("2")) return mensagem;
+        return null;
     }
     
     public String clienteGeral (ClientesVO cvo) {

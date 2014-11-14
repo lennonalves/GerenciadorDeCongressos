@@ -39,6 +39,23 @@
     <Property name="useNullLayout" type="boolean" value="true"/>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblAtualizaChat">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Zegoe Light - U" size="18" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Atualizar Chat"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAtualizaChatMouseClicked"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="637" y="310" width="120" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Component class="javax.swing.JLabel" name="imgAtualizar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -86,7 +103,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="430" y="140" width="330" height="180"/>
+          <AbsoluteConstraints x="430" y="140" width="330" height="170"/>
         </Constraint>
       </Constraints>
 
@@ -96,7 +113,6 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="BEM VINDO AO PANDA CHAT!&#xa;&#xa;Conecte-se com seu nome de usu&#xe1;rio e mande &#xa;mensagens aos seus amigos atrav&#xe9;s de nossos &#xa;protocolos.&#xa;&#xa;Basta selecionar o usu&#xe1;rio na lista de clientes &#xa;conectados, digitar a mensagem e clicar em &#xa;enviar! Em instantes seu amigo ir&#xe1; receber a &#xa;mensagem.. :)"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>

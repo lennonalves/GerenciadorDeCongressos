@@ -15,21 +15,10 @@ public class ProxyLogin extends TelaLogin {
     
     private String usuario, senha;
     
-//    public static TelaLoginProxy instancia;
-//
-//    protected TelaLoginProxy(){}
-    
     public ProxyLogin(String usuario, String senha) {
         this.usuario = usuario;
         this.senha = senha;
-    }
-    
-//    public static TelaLoginProxy getInstancia() {
-//        if (instancia == null)
-//            instancia = new TelaLoginProxy();
-//        return instancia;
-//    }
-    
+    }  
     
 
     /**

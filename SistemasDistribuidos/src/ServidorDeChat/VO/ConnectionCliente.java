@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 public class ConnectionCliente extends Thread {
 
     DatagramSocket s = null;
+    int aux;
     
     public ConnectionCliente(DatagramSocket conexao) {
         this.s = conexao;
@@ -40,6 +41,8 @@ public class ConnectionCliente extends Thread {
 //            System.out.println("fora");
             String m = new String(request.getData()); 
             System.out.println(m);
+            aux = m.lastIndexOf("#");
+            ClientesVO.getInstancia().setAparecerNaTela("CHAT:\t" + m.substring(aux+1).trim());
         }
     }
 }

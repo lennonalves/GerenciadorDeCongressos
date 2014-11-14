@@ -47,7 +47,7 @@ public class ConnectionServidor extends Thread {
             String m = new String(request.getData());
             InetAddress endereco = request.getAddress();
 
-            cvo.setHostId(null); cvo.setHostName(null); cvo.setHostAddress(null);
+            //cvo.setHostId(null); cvo.setHostName(null); cvo.setHostAddress(null);
 
             if (m.substring(0, 1).equals("1")) 
             {
@@ -55,8 +55,8 @@ public class ConnectionServidor extends Thread {
                 cvo.setHostName(m.substring(2).trim());
                 cvo.setHostAddress(endereco.getHostAddress());
                 cvo.setHostPort(Integer.toString(request.getPort()));
-                System.out.print(crn.adicionaCliente(cvo));
-                System.out.println("\n" + crn.listarClientes(cvo));
+                System.out.println(crn.adicionaCliente(cvo));
+                System.out.println(crn.listarClientes(cvo));
                 
             }
 
@@ -65,7 +65,6 @@ public class ConnectionServidor extends Thread {
                 cvo.setHostId(m.substring(0, 2).trim());
                 cvo.setHostName(m.substring(2).trim());
                 cvo.setHostAddress(endereco.getHostAddress());
-                cvo.setHostPort(Integer.toString(request.getPort()));
                 System.out.println(crn.removeCliente(cvo));
                 System.out.println(crn.listarClientes(cvo));
             }

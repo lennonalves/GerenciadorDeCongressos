@@ -71,7 +71,7 @@ public class ClientesPers {
             System.out.println(cvo.getHostName());
             Connection con = cx.conectar();
             Statement query = con.createStatement();
-            query.executeUpdate("DELETE FROM CLIENTES WHERE CLI_IP = '" + cvo.getHostAddress()+ "'");
+            query.executeUpdate("DELETE FROM CLIENTES WHERE CLI_PORTA = '" + cvo.getHostPort() + "'");
             cx.desconectar();
             
             mensagem = cvo.getHostId();
@@ -142,7 +142,7 @@ public class ClientesPers {
             
             Connection con = cx.conectar();
             Statement consulta = con.createStatement();
-            ResultSet resultado = consulta.executeQuery("SELECT * FROM CLIENTES");
+            ResultSet resultado = consulta.executeQuery("SELECT * FROM CLIENTES WHERE CLI_PORTA <> '99999'");
             
             while (resultado.next()){
                 

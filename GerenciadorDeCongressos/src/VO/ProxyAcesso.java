@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
  * @author lennon
  */
 public class ProxyAcesso {
-	
-	private String usuario, senha;
+    
+    private String usuario, senha;
 	 
     public ProxyAcesso(String usuario, String senha) {
         this.usuario = usuario;

@@ -24,7 +24,7 @@ public class ClientesVO {
     }
     
     private String clienteatual, hostId, hostName, hostAddress, hostPort, mensagem,
-            ipDestino, portaDestino, conversa;
+            ipDestino, portaDestino, conversa, aparecerNaTela;
     
     public DefaultTableModel dtm = new DefaultTableModel();
 
@@ -106,6 +106,14 @@ public class ClientesVO {
 
     public void setConversa(String conversa) {
         this.conversa = conversa;
+    }
+
+    public String getAparecerNaTela() {
+        return aparecerNaTela;
+    }
+
+    public void setAparecerNaTela(String aparecerNaTela) {
+        this.aparecerNaTela = aparecerNaTela;
     }
     
 }

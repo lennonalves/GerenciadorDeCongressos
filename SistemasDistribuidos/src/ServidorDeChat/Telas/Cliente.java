@@ -29,7 +29,7 @@ public class Cliente extends javax.swing.JFrame {
     }
     
     boolean flag = false;
-    String hostName;
+    String hostName, ultimamensagem = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,6 +40,7 @@ public class Cliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblAtualizaChat = new javax.swing.JLabel();
         imgAtualizar = new javax.swing.JLabel();
         txtIP = new javax.swing.JTextField();
         txtPorta = new javax.swing.JTextField();
@@ -75,6 +76,17 @@ public class Cliente extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        lblAtualizaChat.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
+        lblAtualizaChat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtualizaChat.setText("Atualizar Chat");
+        lblAtualizaChat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAtualizaChatMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblAtualizaChat);
+        lblAtualizaChat.setBounds(637, 310, 120, 26);
+
         imgAtualizar.setFont(new java.awt.Font("Eras Medium ITC", 0, 14)); // NOI18N
         imgAtualizar.setForeground(new java.awt.Color(255, 255, 255));
         imgAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/atualizar32.png"))); // NOI18N
@@ -96,12 +108,11 @@ public class Cliente extends javax.swing.JFrame {
 
         txtChat.setColumns(20);
         txtChat.setRows(5);
-        txtChat.setText("BEM VINDO AO PANDA CHAT!\n\nConecte-se com seu nome de usuário e mande \nmensagens aos seus amigos através de nossos \nprotocolos.\n\nBasta selecionar o usuário na lista de clientes \nconectados, digitar a mensagem e clicar em \nenviar! Em instantes seu amigo irá receber a \nmensagem.. :)");
         txtChat.setEnabled(false);
         MensagemEnviar1.setViewportView(txtChat);
 
         getContentPane().add(MensagemEnviar1);
-        MensagemEnviar1.setBounds(430, 140, 330, 180);
+        MensagemEnviar1.setBounds(430, 140, 330, 170);
 
         txtMensagem.setColumns(20);
         txtMensagem.setRows(5);
@@ -168,31 +179,26 @@ public class Cliente extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         atualizarListaCliente();
+        imprimir();
     }//GEN-LAST:event_formWindowActivated
 
     private void atualizarListaCliente(){
-        
         ClientesVO cvo = ClientesVO.getInstancia();
         cvo.dtm = (DefaultTableModel) tbClientes.getModel();
         cvo.dtm.setNumRows(0);
         
         ClientesRN crn = ClientesRN.getInstancia();
         crn.atualizaClientes(cvo);
-        
     }
     
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        
         atualizarListaCliente();
-        
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void imgAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAtualizarMouseClicked
         // TODO add your handling code here:
-        
         atualizarListaCliente();
-        
     }//GEN-LAST:event_imgAtualizarMouseClicked
 
     private void lblConectarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConectarMouseClicked
@@ -232,7 +238,7 @@ public class Cliente extends javax.swing.JFrame {
 
                     //datagrama 4
                     ClientesVO cvo = ClientesVO.getInstancia();
-                    cvo.setHostPort(Integer.toString(conexao.getLocalPort()));
+                    cvo.setHostPort(Integer.toString(conexao.getPort()));
                     ConnectionCliente cc = new ConnectionCliente(conexao);
                     cc.start();
 
@@ -266,6 +272,9 @@ public class Cliente extends javax.swing.JFrame {
                     InetAddress aHost = InetAddress.getByName(txtIP.getText());
                     int serverPort = Integer.parseInt(txtPorta.getText());
 
+                    ClientesVO cvo = ClientesVO.getInstancia();
+                    cvo.setHostPort(Integer.toString(conexao.getLocalPort()));
+                    
                     DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
                     conexao.send(request);
 
@@ -279,41 +288,72 @@ public class Cliente extends javax.swing.JFrame {
             }
         }
         else
-            JOptionPane.showMessageDialog(null, "Favor inserir os dados corretamente");
+            JOptionPane.showMessageDialog(null, "Favor inserir os dados corretamente.");
     }//GEN-LAST:event_lblConectarMouseClicked
 
+    void imprimir() {
+        if (  !(ClientesVO.getInstancia().getAparecerNaTela().equals(""))  )
+            if (  !(ClientesVO.getInstancia().getAparecerNaTela().equals(ultimamensagem))  )
+                if (txtChat.getText().equals(""))
+                {
+                    txtChat.setText(txtChat.getText() + ClientesVO.getInstancia().getAparecerNaTela());
+                    ultimamensagem = ClientesVO.getInstancia().getAparecerNaTela();
+                }
+                else
+                {
+                    txtChat.setText(txtChat.getText() + "\n" + ClientesVO.getInstancia().getAparecerNaTela());
+                    ultimamensagem = ClientesVO.getInstancia().getAparecerNaTela();
+                }
+    }
+    
     private void lblEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnviarMouseClicked
         // TODO add your handling code here:
         
-        ClientesVO cvo = ClientesVO.getInstancia();
+        if(tbClientes.getSelectedRow() >= 0) {
         
-        int linha = 0; DatagramSocket conexao = null;
-        
-        try 
-        {
-            linha = tbClientes.getSelectedRow();
-            cvo.setIpDestino((String) cvo.dtm.getValueAt(linha, 0));
-            cvo.setPortaDestino((String) cvo.dtm.getValueAt(linha, 1));
-            cvo.setConversa(txtMensagem.getText());
-            
-            String mensagem = "3#" + cvo.getIpDestino() + "#" + cvo.getPortaDestino() + "#" + cvo.getConversa();
-//            System.out.println(mensagem);
+            ClientesVO cvo = ClientesVO.getInstancia();
+            int linha = tbClientes.getSelectedRow(); DatagramSocket conexao = null;
 
-            conexao = new DatagramSocket();
-            byte[] m = mensagem.getBytes();
-
-            InetAddress aHost = InetAddress.getByName(txtIP.getText());
-            int serverPort = Integer.parseInt(txtPorta.getText());
-
-            DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
-            conexao.send(request);
+            try 
+            {
                 
-        } catch (IOException e)
-        {  
-            System.out.println("IOException: " + e);
+                cvo.setIpDestino((String) cvo.dtm.getValueAt(linha, 0));
+                cvo.setPortaDestino((String) cvo.dtm.getValueAt(linha, 1));
+                cvo.setConversa(txtMensagem.getText());
+
+                cvo.setAparecerNaTela("VOCÊ:\t" + cvo.getConversa());
+
+                String mensagem = "3#" + cvo.getIpDestino() + "#" + cvo.getPortaDestino() + "#" + cvo.getConversa();
+    //            System.out.println(mensagem);
+
+                conexao = new DatagramSocket();
+                byte[] m = mensagem.getBytes();
+
+                InetAddress aHost = InetAddress.getByName(txtIP.getText());
+                int serverPort = Integer.parseInt(txtPorta.getText());
+
+                DatagramPacket request = new DatagramPacket(m, m.length, aHost, serverPort);
+                conexao.send(request);
+
+            } catch (IOException e)
+            {  
+                System.out.println("IOException: " + e);
+            }
+
+            txtMensagem.setText("");
+        
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Favor selecionar um usuário na lista.");
         }
         
     }//GEN-LAST:event_lblEnviarMouseClicked
+
+    private void lblAtualizaChatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtualizaChatMouseClicked
+        // TODO add your handling code here:
+        imprimir();
+    }//GEN-LAST:event_lblAtualizaChatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -356,6 +396,7 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel imgAtualizar;
     private javax.swing.JLabel imgBg;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAtualizaChat;
     private javax.swing.JLabel lblConectar;
     private javax.swing.JLabel lblEnviar;
     private javax.swing.JTable tbClientes;
