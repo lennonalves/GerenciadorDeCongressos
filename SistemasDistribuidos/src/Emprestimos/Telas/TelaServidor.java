@@ -5,18 +5,30 @@
  */
 package Emprestimos.Telas;
 
+import Emprestimos.VO.ConnectionServidor;
+import Emprestimos.VO.ServidorVO;
+
 /**
  *
  * @author lennonalves
  */
-public class Servidor extends javax.swing.JFrame {
+public class TelaServidor extends javax.swing.JFrame {
 
     /**
      * Creates new form Servidor
      */
-    public Servidor() {
+    
+    public static TelaServidor instancia;
+    
+    protected TelaServidor() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public static TelaServidor getInstancia() {
+        if (instancia == null)
+            instancia = new TelaServidor();
+        return instancia;
     }
     
     boolean flag = false;
@@ -31,6 +43,7 @@ public class Servidor extends javax.swing.JFrame {
     private void initComponents() {
 
         lblStatusServidor = new javax.swing.JLabel();
+        txtPorta = new javax.swing.JTextField();
         lblImgFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +64,12 @@ public class Servidor extends javax.swing.JFrame {
         getContentPane().add(lblStatusServidor);
         lblStatusServidor.setBounds(70, 226, 170, 20);
 
+        txtPorta.setFont(new java.awt.Font("Zegoe Light - U", 0, 12)); // NOI18N
+        txtPorta.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPorta.setText("1970");
+        getContentPane().add(txtPorta);
+        txtPorta.setBounds(270, 10, 40, 30);
+
         lblImgFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/servidor-emprestimos.jpg"))); // NOI18N
         getContentPane().add(lblImgFundo);
         lblImgFundo.setBounds(0, 0, 320, 270);
@@ -60,15 +79,26 @@ public class Servidor extends javax.swing.JFrame {
 
     private void lblStatusServidorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStatusServidorMouseClicked
         // TODO add your handling code here:
+        
+        ServidorVO svo = ServidorVO.getInstancia();
+        
         if (flag == true) {
-//servidor ligado
+//servidor desligado
             flag = false;
             lblStatusServidor.setText("LIGAR SERVIDOR");
+            
+            txtPorta.setEnabled(true);
         } 
         else {
-//servidor desligado
+//servidor ligado
             flag = true;
             lblStatusServidor.setText("DESLIGAR SERVIDOR");
+            
+            txtPorta.setEnabled(false);
+            
+            svo.setPortaServidor(txtPorta.getText());
+            ConnectionServidor cs = new ConnectionServidor();
+            cs.start();
         }
     }//GEN-LAST:event_lblStatusServidorMouseClicked
 
@@ -89,20 +119,21 @@ public class Servidor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Servidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaServidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Servidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaServidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Servidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaServidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Servidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaServidor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Servidor().setVisible(true);
+                new TelaServidor().setVisible(true);
             }
         });
     }
@@ -110,5 +141,6 @@ public class Servidor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblImgFundo;
     private javax.swing.JLabel lblStatusServidor;
+    private javax.swing.JTextField txtPorta;
     // End of variables declaration//GEN-END:variables
 }

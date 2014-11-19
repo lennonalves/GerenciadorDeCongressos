@@ -5,18 +5,31 @@
  */
 package Emprestimos.Telas;
 
+import Emprestimos.RN.LoginRN;
+import Emprestimos.VO.LoginVO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lennonalves
  */
-public class LoginUsuario extends javax.swing.JFrame {
+public class TelaLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginUsuario
      */
-    public LoginUsuario() {
+    
+    public static TelaLogin instancia;
+    
+    protected TelaLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public static TelaLogin getInstancia() {
+        if (instancia == null)
+            instancia = new TelaLogin();
+        return instancia;
     }
 
     /**
@@ -29,10 +42,11 @@ public class LoginUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         lblSenha = new javax.swing.JLabel();
-        txtUsuario1 = new javax.swing.JTextField();
-        lblLogin1 = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JTextField();
+        lblLogin = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        btnEntrar = new javax.swing.JButton();
         lblTelaLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,26 +59,32 @@ public class LoginUsuario extends javax.swing.JFrame {
         lblSenha.setFont(new java.awt.Font("Zegoe Light - U", 0, 16)); // NOI18N
         lblSenha.setText("Senha:");
         getContentPane().add(lblSenha);
-        lblSenha.setBounds(50, 180, 180, 16);
+        lblSenha.setBounds(50, 170, 180, 16);
+        getContentPane().add(txtSenha);
+        txtSenha.setBounds(50, 190, 180, 28);
 
-        txtUsuario1.setText("senha");
-        getContentPane().add(txtUsuario1);
-        txtUsuario1.setBounds(50, 200, 180, 28);
-
-        lblLogin1.setFont(new java.awt.Font("Zegoe Light - U", 0, 18)); // NOI18N
-        lblLogin1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogin1.setText("Login");
-        getContentPane().add(lblLogin1);
-        lblLogin1.setBounds(40, 90, 190, 30);
+        lblLogin.setFont(new java.awt.Font("Zegoe Light - U", 0, 14)); // NOI18N
+        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogin.setText("Seja Bem Vindo!");
+        getContentPane().add(lblLogin);
+        lblLogin.setBounds(40, 90, 190, 20);
 
         lblUsuario.setFont(new java.awt.Font("Zegoe Light - U", 0, 16)); // NOI18N
         lblUsuario.setText("Usuário:");
         getContentPane().add(lblUsuario);
-        lblUsuario.setBounds(50, 130, 180, 16);
-
-        txtUsuario.setText("usuario");
+        lblUsuario.setBounds(50, 120, 180, 16);
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(50, 150, 180, 28);
+        txtUsuario.setBounds(50, 140, 180, 28);
+
+        btnEntrar.setFont(new java.awt.Font("Zegoe Light - U", 0, 14)); // NOI18N
+        btnEntrar.setText("ENTRAR");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEntrar);
+        btnEntrar.setBounds(50, 220, 180, 20);
 
         lblTelaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGENS/login-emprestimos.jpg"))); // NOI18N
         getContentPane().add(lblTelaLogin);
@@ -72,6 +92,16 @@ public class LoginUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+        LoginVO lvo = LoginVO.getInstancia();
+        lvo.setUser(txtUsuario.getText());
+        lvo.setSenha(txtSenha.getText());
+        
+        LoginRN lrn = LoginRN.getInstancia();
+        JOptionPane.showMessageDialog(null, lrn.autenticaLogin(lvo));
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,30 +120,32 @@ public class LoginUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginUsuario().setVisible(true);
+                new TelaLogin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblLogin1;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTelaLogin;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtUsuario1;
     // End of variables declaration//GEN-END:variables
 }
