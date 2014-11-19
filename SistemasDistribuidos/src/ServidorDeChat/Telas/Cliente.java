@@ -178,8 +178,8 @@ public class Cliente extends javax.swing.JFrame {
     
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        atualizarListaCliente();
-        imprimir();
+        //atualizarListaCliente();
+        //imprimir();
     }//GEN-LAST:event_formWindowActivated
 
     private void atualizarListaCliente(){
