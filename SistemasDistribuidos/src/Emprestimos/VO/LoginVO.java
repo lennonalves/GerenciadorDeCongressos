@@ -21,6 +21,7 @@ public class LoginVO {
         return instancia;
     }
     
+    private int id;
     private String user, senha;
 
     public String getUser() {
@@ -37,5 +38,13 @@ public class LoginVO {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

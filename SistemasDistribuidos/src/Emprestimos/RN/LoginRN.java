@@ -27,13 +27,24 @@ public class LoginRN {
     private String mensagem = null;
     
     public String autenticaLogin(LoginVO lvo) {
-        if (lvo.getUser().equals("") || lvo.getSenha().equals("")) {
-            LoginPers lpers = LoginPers.getInstancia();
+        if (camposVazios(lvo) == true) {
+            mensagem = "ERRO: Favor preencher os campos corretamente.";
         }
         else {
-            mensagem = "Favor preencher os campos corretamentes.";
+            if (temPermissao(lvo) == true)
+                mensagem = "Login realizado com sucesso!";
+            else
+                mensagem = "ERRO: Não encontramos um usuário/senha correspondente, tente novamente.";
         }
         return mensagem;
     }
     
+    public boolean camposVazios(LoginVO lvo) {
+        return lvo.getUser().trim().equals("") || lvo.getUser().trim().equals("") || lvo.getSenha() == null || lvo.getSenha() == null;
+    }
+    
+    public boolean temPermissao(LoginVO lvo) {
+        LoginPers lpers = LoginPers.getInstancia();
+        return lpers.fazerLogin(lvo);
+    }
 }

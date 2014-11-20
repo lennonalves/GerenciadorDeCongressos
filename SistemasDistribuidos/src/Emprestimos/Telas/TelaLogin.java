@@ -42,15 +42,15 @@ public class TelaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         lblSenha = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JTextField();
         lblLogin = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
         txtUsuario = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
         lblTelaLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login | Empréstimos");
+        setTitle("Login || Empréstimos entre Amigos");
         setMinimumSize(new java.awt.Dimension(276, 310));
         setName("telaLogin"); // NOI18N
         setResizable(false);
@@ -60,8 +60,6 @@ public class TelaLogin extends javax.swing.JFrame {
         lblSenha.setText("Senha:");
         getContentPane().add(lblSenha);
         lblSenha.setBounds(50, 170, 180, 16);
-        getContentPane().add(txtSenha);
-        txtSenha.setBounds(50, 190, 180, 28);
 
         lblLogin.setFont(new java.awt.Font("Zegoe Light - U", 0, 14)); // NOI18N
         lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -73,6 +71,8 @@ public class TelaLogin extends javax.swing.JFrame {
         lblUsuario.setText("Usuário:");
         getContentPane().add(lblUsuario);
         lblUsuario.setBounds(50, 120, 180, 16);
+        getContentPane().add(txtSenha);
+        txtSenha.setBounds(50, 190, 180, 28);
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(50, 140, 180, 28);
 
@@ -100,7 +100,20 @@ public class TelaLogin extends javax.swing.JFrame {
         lvo.setSenha(txtSenha.getText());
         
         LoginRN lrn = LoginRN.getInstancia();
-        JOptionPane.showMessageDialog(null, lrn.autenticaLogin(lvo));
+        String exibir = lrn.autenticaLogin(lvo);
+        
+        if (!(lrn.autenticaLogin(lvo).substring(0, 1).equals("E"))) {
+            JOptionPane.showMessageDialog(null, exibir, "Seja Bem Vindo || Empréstimo entre Amigos", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            TelaMenu tm = TelaMenu.getInstancia();
+            tm.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, exibir, "Erro ao realizar login", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        txtUsuario.setText("");
+        txtSenha.setText("");
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
@@ -145,7 +158,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTelaLogin;
     private javax.swing.JLabel lblUsuario;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
