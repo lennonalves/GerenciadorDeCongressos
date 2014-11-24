@@ -8,6 +8,7 @@ package TELAS;
 
 import RN.LoginRN;
 import VO.LoginVO;
+import VO.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -126,8 +127,12 @@ public class TelaLogin extends javax.swing.JFrame {
         lvo.setUser(txtUser.getText());
         lvo.setSenha(txtSenha.getText());
         
-        LoginRN lrn = LoginRN.getInstancia();
-        JOptionPane.showMessageDialog(null, lrn.fazerLogin(lvo));
+        Proxy login = new Proxy();
+        
+        login.temPermissao(txtUser.getText(), txtSenha.getText());
+        
+        //LoginRN lrn = LoginRN.getInstancia();
+        //JOptionPane.showMessageDialog(null, lrn.fazerLogin(lvo));
         
     }//GEN-LAST:event_btnOkActionPerformed
 

@@ -3,37 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PERS;
+package VO;
 
+import PERS.Conexao;
 import TELAS.TelaAvaliador;
 import TELAS.TelaMenu;
-import VO.AvaliadorVO;
-import VO.LoginVO;
-import VO.MenuVO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author lennonalves
+ * @author victor
  */
-public class LoginPers {
+public class Autenticacao implements InterfaceProxy {
+
     
-    public static LoginPers instancia;
-    
-    protected LoginPers(){}
-    
-    public static LoginPers getInstancia() {
-        if (instancia == null)
-            instancia = new LoginPers();
-        return instancia;
-    }
-    
-    public String fazerLogin (LoginVO lvo) {
-        
-        Conexao cx = Conexao.getInstancia();
+    public boolean temPermissao(String usuario, String senha) {
+       Conexao cx = Conexao.getInstancia();
         String mensagem = null;
 
         try {
@@ -41,7 +30,7 @@ public class LoginPers {
             Connection con = cx.conectar();
             Statement consulta = con.createStatement();
             ResultSet resultado = consulta.executeQuery("SELECT * FROM LOGIN WHERE USUARIO = '"
-            + lvo.getUser() + "' AND SENHA = '" + lvo.getSenha() + "'");
+            + usuario + "' AND SENHA = '" + senha + "'");
 
             while(resultado.next()){
 
@@ -64,6 +53,8 @@ public class LoginPers {
                     telaMenu.setVisible(true);
 
                 }
+                 
+                return true;
             }
             cx.desconectar();
 
@@ -73,42 +64,35 @@ public class LoginPers {
 
         }
         
-        return mensagem;
+        return false;
+        //return mensagem;
         
-    }
-    
-     public boolean controleAcesso(LoginVO lvo) {
         
-         
-         Conexao cx = Conexao.getInstancia();
-         
-         try {
-             
+        
+        
+        
+        /*Conexao cx = Conexao.getInstancia();
+        
+        try {
             Connection con = cx.conectar();
             Statement consulta = con.createStatement();
             ResultSet resultado = consulta.executeQuery("SELECT * FROM LOGIN");
-            
-            while(resultado.next()){
-                
-                if (lvo.getUser().equals(resultado.getString("USUARIO")) && lvo.getSenha().equals(resultado.getString("SENHA"))) {
-                    
+            while (resultado.next()){
+                if (usuario.equals(resultado.getString("USUARIO")) && senha.equals(resultado.getString("SENHA"))){
                     return true;
-                    
+                } else {
+                    return false;
                 }
-                
             }
-            
-            return false;
-         
-         } catch (SQLException e){
-            
-                System.out.println("ERRO: "+ e.getMessage());
-         
-         }
-         
-         cx.desconectar();
-         
-         return false;
+            cx.desconectar();
+        } catch (SQLException e){
+                JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
+        }
+		return false;*/
+    }
+
+    public void qualPermissao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

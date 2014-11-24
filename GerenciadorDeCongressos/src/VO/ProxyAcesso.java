@@ -25,7 +25,9 @@ public class ProxyAcesso {
         this.senha = senha;
     }
     
-    public boolean temPermissaoDeAcesso() {
+    
+    
+    /*public boolean temPermissaoDeAcesso() {
     	Conexao cx = Conexao.getInstancia();
         
         try {
@@ -44,5 +46,5 @@ public class ProxyAcesso {
                 JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
         }
 		return false;
-    }
+    } */
 }
