@@ -78,6 +78,7 @@ public class LoginPers {
     }
     
      public boolean controleAcesso(LoginVO lvo) {
+        
          
          Conexao cx = Conexao.getInstancia();
          
