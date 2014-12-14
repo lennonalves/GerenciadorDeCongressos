@@ -11,11 +11,11 @@ package VO;
  */
 public class Proxy implements InterfaceProxy {
 
+    @Override
     public boolean temPermissao(String usuario, String senha) {
         Autenticacao permissao = new Autenticacao();
          
-        if(permissao.temPermissao(usuario, senha)) return true;
-        else return false;
+        return permissao.temPermissao(usuario, senha);
     }
     
 }

@@ -6,10 +6,8 @@
 
 package TELAS;
 
-import RN.LoginRN;
 import VO.LoginVO;
 import VO.*;
-import javax.swing.JOptionPane;
 
 /**
  *

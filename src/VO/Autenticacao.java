@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,11 +19,17 @@ import javax.swing.JOptionPane;
  */
 public class Autenticacao implements InterfaceProxy {
 
-    
+    /**
+     *
+     * @param usuario
+     * @param senha
+     * @return
+     */
+    @Override
     public boolean temPermissao(String usuario, String senha) {
        Conexao cx = Conexao.getInstancia();
-        String mensagem = null;
-
+       //String mensagem = null;
+       
         try {
 
             Connection con = cx.conectar();
@@ -34,7 +39,7 @@ public class Autenticacao implements InterfaceProxy {
 
             while(resultado.next()){
 
-                mensagem = "Bem vindo, " + resultado.getString("NOME") + "!";
+                //mensagem = "Bem vindo, " + resultado.getString("NOME") + "!";
 
                 if (resultado.getString("FUNCAO").equals("Avaliador")){
 
@@ -60,7 +65,7 @@ public class Autenticacao implements InterfaceProxy {
 
         } catch (SQLException e){
 
-            mensagem = "ERRO: " + e.getMessage();
+            System.out.println("ERRO: " + e.getMessage());
 
         }
         
@@ -89,10 +94,5 @@ public class Autenticacao implements InterfaceProxy {
                 JOptionPane.showMessageDialog(null, "ERRO: "+ e.getMessage());
         }
 		return false;*/
-    }
-
-    public void qualPermissao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

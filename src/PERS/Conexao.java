@@ -33,7 +33,7 @@ public class Conexao {
             Class.forName("org.firebirdsql.jdbc.FBDriver");
 
             //estabelecendo conexão com o BD
-            retornaConexao = DriverManager.getConnection("jdbc:firebirdsql:localhost:/var/lib/firebird/banco.fdb",
+            retornaConexao = DriverManager.getConnection("jdbc:firebirdsql:localhost:/var/firebird/banco.fdb",
                     "SYSDBA", "masterkey");
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "CLASSE NAO ENCONTRADA");
