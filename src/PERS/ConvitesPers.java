@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+/*
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,6 +20,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+*/
 
 /**
  *
@@ -37,9 +39,9 @@ public class ConvitesPers {
     }
     
     public String enviarConvite (ConvitesVO cvo) {
-        
+        /*
         Properties props = new Properties();
-        /** Parâmetros de conexão com servidor Gmail */
+        
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -98,8 +100,8 @@ public class ConvitesPers {
                 mensagem = "ERRO: "+ e.getMessage();
                 
         }
-        
-        return mensagem;
+        */
+        //return mensagem;
+        return null;
     }
-    
 }
